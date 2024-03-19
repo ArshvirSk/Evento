@@ -5,6 +5,9 @@ import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
+
 // const contactFormSchema = z.object({
 //   name: z.string().min(1, { message: "Name is required" }),
 //   email: z.string().email(),
@@ -609,6 +612,6 @@ app.post("/e6check", async (req, res) => {
 //   res.json({ message: "Hello world" });
 // });
 
-app.listen(5000, "https://evento-w3o7.onrender.com/", () =>
+app.listen(PORT, () =>
     console.log("App running on http://192.168.1.248:5000")
 );
