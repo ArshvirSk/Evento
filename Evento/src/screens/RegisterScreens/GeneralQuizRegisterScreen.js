@@ -67,7 +67,7 @@ const GeneralQuizRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.248:5000/e3check',
+        'http://evento-w3o7.onrender.com/e3check',
         inputData
       );
       console.log(response.data.valueMatched);

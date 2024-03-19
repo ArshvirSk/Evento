@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+// import { Icon } from 'react-native-vector-icons/Ionicons';
 
 export default function EventTile({ id, title, date, time }) {
   const navigation = useNavigation();

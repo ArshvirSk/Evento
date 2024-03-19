@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Alert, Button, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
@@ -76,7 +76,7 @@ const PosterRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.248:5000/e1check',
+        'http://evento-w3o7.onrender.com/e1check',
         inputData
       );
       console.log(response.data.valueMatched);

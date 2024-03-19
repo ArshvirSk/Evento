@@ -613,5 +613,5 @@ app.post("/e6check", async (req, res) => {
 // });
 
 app.listen(PORT, () =>
-    console.log("App running on http://192.168.1.248:5000")
+    console.log("App running on https://evento-w3o7.onrender.com/")
 );

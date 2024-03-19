@@ -76,7 +76,7 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.248:5000/e4check',
+        'http://evento-w3o7.onrender.com/e4check',
         inputData
       );
       console.log(response.data.valueMatched);
