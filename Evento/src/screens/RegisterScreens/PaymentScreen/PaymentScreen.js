@@ -11,7 +11,7 @@ const PaymentScreen = ({ route, navigation }) => {
     // console.log(data);
     console.log(eventDets);
 
-    const eventURL = 'http://192.168.1.248:5000/' + eventDets.id;
+    const eventURL = 'http://evento-w3o7.onrender.com/' + eventDets.id;
 
     console.log(eventURL);
 
