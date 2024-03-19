@@ -38,9 +38,4 @@ oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 const sheets = google.sheets({ version: "v4", auth: client });
 
-export const drive = google.drive({
-    version: "v3",
-    auth: oauth2Client,
-});
-
 export default sheets;

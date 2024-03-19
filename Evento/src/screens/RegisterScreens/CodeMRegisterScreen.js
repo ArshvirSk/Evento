@@ -1,45 +1,38 @@
 import { useNavigation } from '@react-navigation/native';
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
-import InputField from "../../components/InputField";
-import { departments } from "../../data/data";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Button, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
+import InputField from '../../components/InputField';
+import { departments } from '../../data/data';
 
 const CodeMRegisterScreen = ({ EventId, title }) => {
   const navigation = useNavigation();
 
   const [department, setDepartment] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  const [inputData, setInputData] = useState(Object);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const DropdownComponent = () => {
-    // const renderLabel = () => {
-    //   if (value || isFocus) {
-    //     return (
-    //       <Text style={[styles.label, isFocus && { color: "blue" }]}>
-    //         Dropdown label
-    //       </Text>
-    //     );
-    //   }
-    //   return null;
-    // };
-
     return (
       <View style={{ marginBottom: 10 }}>
         {/* {renderLabel()} */}
-        <Text style={{ fontWeight: "bold", fontSize: 16, paddingBottom: 8 }}>
+        <Text style={{ fontWeight: 'bold', fontSize: 16, paddingBottom: 8, color: '#000' }}>
           Department Name
         </Text>
         <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
+          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
           // placeholderStyle={styles.placeholderStyle}
           // selectedTextStyle={styles.selectedTextStyle}
+          itemTextStyle={{ color: '#000' }}
+          selectedTextStyle={{ color: '#000' }}
           data={departments}
           maxHeight={300}
           labelField="label"
           valueField="value"
           placeholder="Select Department"
+          placeholderStyle={{ color: '#000' }}
           value={department}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
@@ -79,26 +72,25 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
       ...data,
     });
 
-    // setInputData({
-    //   timestamp,
-    //   title,
-    //   department,
-    //   ...data,
-    // });
-
     console.log(inputData);
 
-    navigation.navigate('Payment', { data: inputData })
+    try {
+      const response = await axios.post(
+        'http://192.168.1.248:5000/e4check',
+        inputData
+      );
+      console.log(response.data.valueMatched);
 
-    // try {
-    //   const response = await axios.post(
-    //     `http://192.168.99.227:5000/e1`,
-    //     inputData
-    //   );
-    //   console.log(response.data.message);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      if (response.data.valueMatched === true) {
+        console.log('Value matched, executing subsequent code...');
+        setModalVisible(true);
+      } else {
+        navigation.navigate('Payment', { data: inputData });
+        console.log('Value not matched, executing alternative code...');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -121,7 +113,7 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           name="collegename"
         />
         {errors.participant1name && (
-          <Text style={{ color: "red", marginTop: -15, marginBottom: 10 }}>
+          <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
             This is required.
           </Text>
         )}
@@ -145,7 +137,7 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           name="participant1name"
         />
         {errors.participant1name && (
-          <Text style={{ color: "red", marginTop: -15, marginBottom: 10 }}>
+          <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
             This is required.
           </Text>
         )}
@@ -166,7 +158,7 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           name="participant1phonenumber"
         />
         {errors.participant1phonenumber && (
-          <Text style={{ color: "red", marginTop: -15, marginBottom: 10 }}>
+          <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
             This is required.
           </Text>
         )}
@@ -175,6 +167,32 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           onPress={handleSubmit(onSubmit)}
         // onPress={handleSubmit(onSubmit)}
         />
+      </View>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+            console.log('Modal has been closed.');
+            navigation.navigate('EventDetails', { eventId: EventId });
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>You are already Registered in this Event!!!</Text>
+              <Pressable
+                style={[styles.buttonModal, styles.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  console.log('Modal has been closed.');
+                  navigation.navigate('Drawer');
+                }}>
+                <Text style={styles.textStyle}>Okay</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
       </View>
     </ScrollView>
   );
@@ -189,13 +207,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 10,
-    fontWeight: "900",
-    textAlign: "center",
-    backgroundColor: "rgba(255, 255, 255,0.5)",
+    fontWeight: '900',
+    textAlign: 'center',
+    backgroundColor: 'rgba(255, 255, 255,0.5)',
     paddingVertical: 20,
+    color: '#000',
   },
   button: {
-    backgroundColor: "red",
+    backgroundColor: 'red',
     borderRadius: 5,
     padding: 10,
   },
@@ -207,11 +226,66 @@ const styles = StyleSheet.create({
 
   dropdown: {
     height: 50,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
-    backgroundColor: "rgba(255, 255, 255, 0.404)",
+    backgroundColor: 'rgba(255, 255, 255, 0.404)',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 40,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonMModal: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#21b1f3',
+    padding: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#000',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

@@ -1,6 +1,6 @@
 import express from "express";
-import { ZodError } from "zod";
 
+import { ZodError } from "zod";
 import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
@@ -12,6 +12,8 @@ const app = express();
 // });
 
 app.use(express.json());
+
+// Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
 
 // POSTER MAKING
 app.post("/e1", async (req, res) => {
@@ -30,16 +32,16 @@ app.post("/e1", async (req, res) => {
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[7], //Name
                         req.body[8], //Phone Number
                     ],
@@ -65,6 +67,51 @@ app.post("/e1", async (req, res) => {
     }
 });
 
+app.post("/e1check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('Poster Making request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "Poster",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6] || e === req.body[8]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
 // MODEL MAKING
 app.post("/e2", async (req, res) => {
     try {
@@ -77,73 +124,37 @@ app.post("/e2", async (req, res) => {
             valueInputOption: "RAW",
             insertDataOption: "INSERT_ROWS",
             resource: {
-                // values: [
-                //   // Timestamp, Event, College Name, Dept Name, Participant Name, Email Address, Phone Number, Image
-                //   [
-                //     req.body[0], //Timestamp
-                //     req.body[1], //Event
-                //     req.body[3], //College name
-                //     req.body[2], //Dept Name
-                //     req.body[4], //Name
-                //     req.body[5], //Phone Number
-                //   ],
-                //   [
-                //     req.body[0], //Timestamp
-                //     req.body[1], //Event
-                //     req.body[3], //College name
-                //     req.body[2], //Dept Name
-                //     req.body[7], //Name
-                //     req.body[8], //Phone Number
-                //   ],
-                //   [
-                //     req.body[0], //Timestamp
-                //     req.body[1], //Event
-                //     req.body[3], //College name
-                //     req.body[2], //Dept Name
-                //     req.body[10], //Name
-                //     req.body[11], //Phone Number
-                //   ],
-                //   [
-                //     req.body[0], //Timestamp
-                //     req.body[1], //Event
-                //     req.body[3], //College name
-                //     req.body[2], //Dept Name
-                //     req.body[13], //Name
-                //     req.body[14], //Phone Number
-                //   ],
-                //   // req.body, //debugging purposes
-                // ],
                 values: [
                     // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[7], //Name
                         req.body[8], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[9], //Name
                         req.body[10], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[11], //Name
                         req.body[12], //Phone Number
                     ],
@@ -160,6 +171,51 @@ app.post("/e2", async (req, res) => {
         // });
         // console.log(response);
         res.json({ success: true, message: response });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
+app.post("/e2check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('Model Making request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "Model",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6] || e === req.body[8] || e === req.body[10] || e === req.body[12]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -186,16 +242,16 @@ app.post("/e3", async (req, res) => {
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[7], //Name
                         req.body[8], //Phone Number
                     ],
@@ -212,6 +268,51 @@ app.post("/e3", async (req, res) => {
         // });
         // console.log(response);
         res.json({ success: true, message: response });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
+app.post("/e3check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('General Quiz request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "General Quiz",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6] || e === req.body[8]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -238,8 +339,8 @@ app.post("/e4", async (req, res) => {
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
@@ -256,6 +357,51 @@ app.post("/e4", async (req, res) => {
         // });
         // console.log(response);
         res.json({ success: true, message: response });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
+app.post("/e4check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('Code Mosaic request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "Code Mosaic",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -282,16 +428,16 @@ app.post("/e5", async (req, res) => {
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[7], //Name
                         req.body[8], //Phone Number
                     ],
@@ -308,6 +454,51 @@ app.post("/e5", async (req, res) => {
         // });
         // console.log(response);
         res.json({ success: true, message: response });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
+app.post("/e5check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('Technical Quiz request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "Technical Quiz",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6] || e === req.body[8]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -334,16 +525,16 @@ app.post("/e6", async (req, res) => {
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[5], //Name
                         req.body[6], //Phone Number
                     ],
                     [
                         req.body[0], //Timestamp
                         req.body[2], //Event
-                        req.body[3], //College name
-                        req.body[4], //Dept Name
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
                         req.body[7], //Name
                         req.body[8], //Phone Number
                     ],
@@ -360,6 +551,51 @@ app.post("/e6", async (req, res) => {
         // });
         // console.log(response);
         res.json({ success: true, message: response });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+});
+
+app.post("/e6check", async (req, res) => {
+    let valueMatched;
+
+    try {
+        // console.log(req);
+        console.log('TPP request');
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "TPP",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        for (const e of response.data.values[5]) {
+            if (e === req.body[6] || e === req.body[8]) {
+                valueMatched = true;
+                console.log(e, valueMatched);
+                break;
+            } else {
+                valueMatched = false;
+                console.log(e, valueMatched);
+            }
+        }
+
+        if (valueMatched) {
+            // Do something if valueMatched is true
+            console.log("Value matched, executing subsequent code...");
+        } else {
+            // Do something if valueMatched is false
+            console.log("Value not matched, executing alternative code...");
+        }
+
+        res.json({ valueMatched });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });

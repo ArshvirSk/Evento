@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { EVENTS } from '../../../data/data';
 
-const PaymentScreen = ({ route }) => {
+const PaymentScreen = ({ route, navigation }) => {
     const { data } = route.params;
 
     const eventDets = EVENTS.find((event) => event.id === data[1]);
@@ -21,7 +21,8 @@ const PaymentScreen = ({ route }) => {
                 eventURL,
                 data
             );
-            console.log(response.data.message);
+            console.log(response.data);
+            navigation.navigate('Drawer');
         } catch (error) {
             console.error(error);
         }

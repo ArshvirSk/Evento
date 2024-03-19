@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
@@ -11,6 +12,7 @@ const PosterRegisterScreen = ({ EventId, title }) => {
 
   const [department, setDepartment] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const DropdownComponent = () => {
     return (
@@ -70,26 +72,25 @@ const PosterRegisterScreen = ({ EventId, title }) => {
       ...data,
     });
 
-    // setInputData({
-    //   timestamp,
-    //   title,
-    //   department,
-    //   ...data,
-    // });
-
     console.log(inputData);
 
-    navigation.navigate('Payment', { data: inputData });
+    try {
+      const response = await axios.post(
+        'http://192.168.1.248:5000/e1check',
+        inputData
+      );
+      console.log(response.data.valueMatched);
 
-    // try {
-    //   const response = await axios.post(
-    //     `http://192.168.99.227:5000/e1`,
-    //     inputData
-    //   );
-    //   console.log(response.data.message);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      if (response.data.valueMatched === true) {
+        console.log('Value matched, executing subsequent code...');
+        setModalVisible(true);
+      } else {
+        navigation.navigate('Payment', { data: inputData });
+        console.log('Value not matched, executing alternative code...');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -210,6 +211,32 @@ const PosterRegisterScreen = ({ EventId, title }) => {
         // onPress={handleSubmit(onSubmit)}
         />
       </View>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+            console.log('Modal has been closed.');
+            navigation.navigate('EventDetails', { eventId: EventId });
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>You are already Registered in this Event!!!</Text>
+              <Pressable
+                style={[styles.buttonModal, styles.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  console.log('Modal has been closed.');
+                  navigation.navigate('Drawer');
+                }}>
+                <Text style={styles.textStyle}>Okay</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </ScrollView>
   );
 };
@@ -220,6 +247,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     margin: 20,
   },
+
   title: {
     fontSize: 20,
     marginBottom: 10,
@@ -229,16 +257,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     color: '#000',
   },
+
   button: {
     backgroundColor: 'red',
     borderRadius: 5,
     padding: 10,
   },
-
-  // container: {
-  //   backgroundColor: "white",
-  //   padding: 16,
-  // },
 
   dropdown: {
     height: 50,
@@ -248,6 +272,61 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.404)',
     color: '#000',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 40,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonMModal: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#21b1f3',
+    padding: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#000',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
