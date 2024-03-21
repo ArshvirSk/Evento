@@ -76,7 +76,7 @@ const PosterRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://evento-w3o7.onrender.com/e1check',
+        'http://13.228.225.19:5000/e1check',
         inputData
       );
       console.log(response.data.valueMatched);
