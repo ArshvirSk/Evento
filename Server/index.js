@@ -1,7 +1,8 @@
-// import express from "express";
-const express = require("express");
-const http = require("http");
-const cors = require("cors");
+import express from "express";
+// const express = require("express");
+import http from 'http';
+// const http = require("http");
+// const cors = require("cors");
 import { ZodError } from "zod";
 import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
