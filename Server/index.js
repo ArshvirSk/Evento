@@ -5,13 +5,6 @@ import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 const app = express();
 
 const PORT = 5000;
-// const PORT = '192.168.1.248';
-
-// const contactFormSchema = z.object({
-//   name: z.string().min(1, { message: "Name is required" }),
-//   email: z.string().email(),
-//   phone: z.number().min(8, { message: "Message is required" }),
-// });
 
 app.use(express.json());
 
@@ -22,7 +15,7 @@ app.post("/e1", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Poster",
@@ -52,14 +45,45 @@ app.post("/e1", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[7], //Name
+                        req.body[8], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -76,7 +100,7 @@ app.post("/e1check", async (req, res) => {
         console.log(req);
         console.log('Poster Making request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Poster",
@@ -85,7 +109,7 @@ app.post("/e1check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6] || e === req.body[8]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -119,7 +143,7 @@ app.post("/e2", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Model",
@@ -165,14 +189,61 @@ app.post("/e2", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[7], //Name
+                        req.body[8], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[9], //Name
+                        req.body[10], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[11], //Name
+                        req.body[12], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -189,7 +260,7 @@ app.post("/e2check", async (req, res) => {
         console.log(req);
         console.log('Model Making request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Model",
@@ -198,7 +269,7 @@ app.post("/e2check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6] || e === req.body[8] || e === req.body[10] || e === req.body[12]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -232,7 +303,7 @@ app.post("/e3", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "General Quiz",
@@ -262,14 +333,45 @@ app.post("/e3", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[7], //Name
+                        req.body[8], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -286,7 +388,7 @@ app.post("/e3check", async (req, res) => {
         console.log(req);
         console.log('General Quiz request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "General Quiz",
@@ -295,7 +397,7 @@ app.post("/e3check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6] || e === req.body[8]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -329,7 +431,7 @@ app.post("/e4", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Code Mosaic",
@@ -351,14 +453,37 @@ app.post("/e4", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -375,7 +500,7 @@ app.post("/e4check", async (req, res) => {
         console.log(req);
         console.log('Code Mosaic request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Code Mosaic",
@@ -384,7 +509,7 @@ app.post("/e4check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -418,7 +543,7 @@ app.post("/e5", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Technical Quiz",
@@ -448,14 +573,45 @@ app.post("/e5", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[7], //Name
+                        req.body[8], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -472,7 +628,7 @@ app.post("/e5check", async (req, res) => {
         console.log(req);
         console.log('Technical Quiz request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "Technical Quiz",
@@ -481,7 +637,7 @@ app.post("/e5check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6] || e === req.body[8]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -515,7 +671,7 @@ app.post("/e6", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const response = sheets.spreadsheets.values.append({
+        const responseMain = await sheets.spreadsheets.values.append({
             auth,
             spreadsheetId: SHEET_ID,
             range: "TPP",
@@ -545,14 +701,45 @@ app.post("/e6", async (req, res) => {
             },
         });
 
-        console.log(response);
+        const responseSub = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId: SHEET_ID,
+            range: "ALL RESPONSES",
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: {
+                values: [
+                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[5], //Name
+                        req.body[6], //Phone Number
+                    ],
+                    [
+                        req.body[0], //Timestamp
+                        req.body[2], //Event
+                        req.body[4], //College name
+                        req.body[3], //Dept Name
+                        req.body[7], //Name
+                        req.body[8], //Phone Number
+                    ],
+                    // req.body, //debugging purposes
+                ],
+            },
+        });
 
-        // const response = await sheets.spreadsheets.values.get({
+        console.log(responseMain);
+        console.log(responseSub);
+
+        // const responseMain = await sheets.spreadsheets.values.get({
         //   spreadsheetId: SHEET_ID,
         //   range: "Page1",
         // });
-        // console.log(response);
-        res.json({ success: true, message: response });
+        // console.log(responseMain);
+        res.json({ success: true, message: responseMain });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -569,7 +756,7 @@ app.post("/e6check", async (req, res) => {
         console.log(req);
         console.log('TPP request');
 
-        const response = await sheets.spreadsheets.values.get({
+        const responseMain = await sheets.spreadsheets.values.get({
             auth,
             spreadsheetId: SHEET_ID,
             range: "TPP",
@@ -578,7 +765,7 @@ app.post("/e6check", async (req, res) => {
             valueRenderOption: "FORMATTED_VALUE",
         });
 
-        for (const e of response.data.values[5]) {
+        for (const e of responseMain.data.values[5]) {
             if (e === req.body[6] || e === req.body[8]) {
                 valueMatched = true;
                 console.log(e, valueMatched);
@@ -607,16 +794,7 @@ app.post("/e6check", async (req, res) => {
     }
 });
 
-// app.get("/send-message", (req, res) => {
-//   res.json({ message: "Hello world" });
-// });
 
 app.listen(PORT, () =>
-    console.log("App running on https://evento-w3o7.onrender.com/")
+    console.log("App running on http://evento-w3o7.onrender.com/")
 );
-
-// if (process.env.NODE_ENV === "production") {
-//     app.get("*", (req, res) => {
-//         res.send("hello world!!");
-//     });
-// }
