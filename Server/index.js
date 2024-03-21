@@ -1,17 +1,11 @@
 import express from "express";
-// const express = require("express");
-import http from 'http';
-// const http = require("http");
-// const cors = require("cors");
 import { ZodError } from "zod";
 import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
-const server = http.createServer(app);
-
 const PORT = process.env.PORT || 5000;
-// const PORT = '192.168.';
+// const PORT = '192.168.1.248';
 
 // const contactFormSchema = z.object({
 //   name: z.string().min(1, { message: "Name is required" }),
