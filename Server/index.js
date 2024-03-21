@@ -144,97 +144,98 @@ app.post("/e2", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const responseMain = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "Model",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+        let [responseMain, responseSub] = await Promise.all([
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "Model",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[9], //Name
+                            req.body[10], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[11], //Name
+                            req.body[12], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
+                },
+            }),
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "ALL RESPONSES",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[9], //Name
+                            req.body[10], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[11], //Name
+                            req.body[12], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[9], //Name
-                        req.body[10], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[11], //Name
-                        req.body[12], //Phone Number
-                    ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
-
-        const responseSub = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "ALL RESPONSES",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[9], //Name
-                        req.body[10], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[11], //Name
-                        req.body[12], //Phone Number
-                    ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
+                },
+            })
+        ])
 
         console.log(responseMain);
         console.log(responseSub);
@@ -304,65 +305,66 @@ app.post("/e3", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const responseMain = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "General Quiz",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+        let [responseMain, responseSub] = await Promise.all([
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "General Quiz",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
+                },
+            }),
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "ALL RESPONSES",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
-
-        const responseSub = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "ALL RESPONSES",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
-                    ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
+                },
+            })
+        ])
 
         console.log(responseMain);
         console.log(responseSub);
@@ -432,49 +434,50 @@ app.post("/e4", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const responseMain = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "Code Mosaic",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+        let [responseMain, responseSub] = await Promise.all([
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "Code Mosaic",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
-
-        const responseSub = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "ALL RESPONSES",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+                },
+            }),
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "ALL RESPONSES",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
+                },
+            })
+        ])
 
         console.log(responseMain);
         console.log(responseSub);
@@ -544,65 +547,66 @@ app.post("/e5", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const responseMain = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "Technical Quiz",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+        let [responseMain, responseSub] = await Promise.all([
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "Technical Quiz",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
+                },
+            }),
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "ALL RESPONSES",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
-
-        const responseSub = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "ALL RESPONSES",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
-                    ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
+                },
+            })
+        ])
 
         console.log(responseMain);
         console.log(responseSub);
@@ -672,65 +676,66 @@ app.post("/e6", async (req, res) => {
     try {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
-        const responseMain = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "TPP",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
+        let [responseMain, responseSub] = await Promise.all([
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "TPP",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
+                },
+            }),
+            await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: SHEET_ID,
+                range: "ALL RESPONSES",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[5], //Name
+                            req.body[6], //Phone Number
+                        ],
+                        [
+                            req.body[0], //Timestamp
+                            req.body[2], //Event
+                            req.body[4], //College name
+                            req.body[3], //Dept Name
+                            req.body[7], //Name
+                            req.body[8], //Phone Number
+                        ],
+                        // req.body, //debugging purposes
                     ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
-
-        const responseSub = await sheets.spreadsheets.values.append({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: "ALL RESPONSES",
-            valueInputOption: "RAW",
-            insertDataOption: "INSERT_ROWS",
-            resource: {
-                values: [
-                    // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[5], //Name
-                        req.body[6], //Phone Number
-                    ],
-                    [
-                        req.body[0], //Timestamp
-                        req.body[2], //Event
-                        req.body[4], //College name
-                        req.body[3], //Dept Name
-                        req.body[7], //Name
-                        req.body[8], //Phone Number
-                    ],
-                    // req.body, //debugging purposes
-                ],
-            },
-        });
+                },
+            })
+        ])
 
         console.log(responseMain);
         console.log(responseSub);
