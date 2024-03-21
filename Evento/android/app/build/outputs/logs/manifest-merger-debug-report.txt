@@ -108,6 +108,10 @@ MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\ASUS\.gr
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\ASUS\.gradle\caches\transforms-3\0126cf432a0db5456dc09bababb686af\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:3:20-62
+uses-permission#android,
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:4:3-46
+	android:name
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:4:20-43
 application
 ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17
 MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17

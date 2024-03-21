@@ -5,7 +5,7 @@ import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // const contactFormSchema = z.object({
 //   name: z.string().min(1, { message: "Name is required" }),
