@@ -611,7 +611,7 @@ app.post("/e6check", async (req, res) => {
 //   res.json({ message: "Hello world" });
 // });
 
-app.listen(PORT, 'https://evento-w3o7.onrender.com/', () =>
+app.listen(PORT, 'https://evento-w3o7.onrender.com', () =>
     console.log("App running on https://evento-w3o7.onrender.com/")
 );
 
