@@ -4,7 +4,7 @@ import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 // const PORT = '192.168.1.248';
 
 // const contactFormSchema = z.object({
