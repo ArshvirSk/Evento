@@ -1,11 +1,16 @@
-import express from "express";
-
+// import express from "express";
+const express = require("express");
+const http = require("http");
+const cors = require("cors");
 import { ZodError } from "zod";
 import sheets, { SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
+const server = http.createServer(app);
+
 const PORT = process.env.PORT || 5000;
+// const PORT = '192.168.';
 
 // const contactFormSchema = z.object({
 //   name: z.string().min(1, { message: "Name is required" }),
@@ -611,6 +616,14 @@ app.post("/e6check", async (req, res) => {
 //   res.json({ message: "Hello world" });
 // });
 
-app.listen(PORT, () =>
+server.listen(PORT, () =>
     console.log("App running on https://evento-w3o7.onrender.com/")
 );
+
+if (process.env.NODE_ENV === "production") {
+    // Express serve up index.html file if it doesn't recognize route
+    const path = require("path");
+    app.get("*", (req, res) => {
+        res.send("hello world!!");
+    });
+}
