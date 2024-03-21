@@ -611,12 +611,12 @@ app.post("/e6check", async (req, res) => {
 //   res.json({ message: "Hello world" });
 // });
 
-app.listen(PORT, 'https://evento-w3o7.onrender.com', () =>
+app.listen(PORT, () =>
     console.log("App running on https://evento-w3o7.onrender.com/")
 );
 
-if (process.env.NODE_ENV === "production") {
-    app.get("*", (req, res) => {
-        res.send("hello world!!");
-    });
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.get("*", (req, res) => {
+//         res.send("hello world!!");
+//     });
+// }
