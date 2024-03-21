@@ -68,7 +68,7 @@ const ModelRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'https://evento-w3o7.onrender.com/e2check',
+        'http://evento-w3o7.onrender.com/e2check',
         inputData
       );
       console.log(response.data.valueMatched);
