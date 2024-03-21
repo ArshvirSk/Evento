@@ -1,7 +1,7 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:1:1-27:12
-MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:1:1-27:12
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:1:1-28:12
+MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:1:1-28:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
@@ -113,9 +113,9 @@ ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\m
 	android:name
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:4:20-43
 application
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17
-MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17
-MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-27:17
+MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-27:17
+MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-27:17
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:5:5-8:50
 MERGED from [com.facebook.react:react-android:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\e1231b5b187cb579b629117f9511a862\transformed\jetified-react-android-0.73.6-debug\AndroidManifest.xml:18:5-22:19
 MERGED from [com.facebook.react:react-android:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\e1231b5b187cb579b629117f9511a862\transformed\jetified-react-android-0.73.6-debug\AndroidManifest.xml:18:5-22:19
@@ -174,43 +174,43 @@ MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:10:5-32
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:10:5-32
 	android:theme
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-36
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-36
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-36
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-36
 	android:usesCleartextTraffic
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:6:9-44
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-40
 	android:name
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:6:5-36
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:6:5-36
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-13:65
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:5-14:65
 	android:value
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:7-62
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:7-62
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:16-61
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:16-61
 activity#com.evento.MainActivity
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:5-25:16
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:5-26:16
 	android:label
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-39
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-39
 	android:launchMode
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-38
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-38
 	android:windowSoftInputMode
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-49
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-49
 	android:exported
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-30
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-30
 	android:configChanges
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-116
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-116
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:7-35
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-35
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-24:23
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:7-25:23
 action#android.intent.action.MAIN
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:9-61
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:9-61
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:17-58
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:17-58
 category#android.intent.category.LAUNCHER
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:9-69
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:24:9-69
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:19-66
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:24:19-66
 uses-sdk
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml

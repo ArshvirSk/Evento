@@ -20,7 +20,7 @@ app.use(express.json());
 // POSTER MAKING
 app.post("/e1", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -73,7 +73,7 @@ app.post("/e1check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('Poster Making request');
 
         const response = await sheets.spreadsheets.values.get({
@@ -117,7 +117,7 @@ app.post("/e1check", async (req, res) => {
 // MODEL MAKING
 app.post("/e2", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -186,7 +186,7 @@ app.post("/e2check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('Model Making request');
 
         const response = await sheets.spreadsheets.values.get({
@@ -230,7 +230,7 @@ app.post("/e2check", async (req, res) => {
 // GENERAL QUIZ
 app.post("/e3", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -283,7 +283,7 @@ app.post("/e3check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('General Quiz request');
 
         const response = await sheets.spreadsheets.values.get({
@@ -327,7 +327,7 @@ app.post("/e3check", async (req, res) => {
 // CODE MOSAIC
 app.post("/e4", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -372,7 +372,7 @@ app.post("/e4check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('Code Mosaic request');
 
         const response = await sheets.spreadsheets.values.get({
@@ -416,7 +416,7 @@ app.post("/e4check", async (req, res) => {
 // TECHNICAL QUIZ
 app.post("/e5", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -469,7 +469,7 @@ app.post("/e5check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('Technical Quiz request');
 
         const response = await sheets.spreadsheets.values.get({
@@ -513,7 +513,7 @@ app.post("/e5check", async (req, res) => {
 // TPP
 app.post("/e6", async (req, res) => {
     try {
-        console.log(req);
+        // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         const response = sheets.spreadsheets.values.append({
             auth,
@@ -566,7 +566,7 @@ app.post("/e6check", async (req, res) => {
     let valueMatched;
 
     try {
-        // console.log(req);
+        console.log(req);
         console.log('TPP request');
 
         const response = await sheets.spreadsheets.values.get({

@@ -66,7 +66,7 @@
 39-->[androidx.core:core:1.9.0] C:\Users\ASUS\.gradle\caches\transforms-3\13659b94c66de92d98d7f8af61234b95\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 40
 41    <application
-41-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-26:17
+41-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:5:3-27:17
 42        android:name="com.evento.MainApplication"
 42-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:6:5-36
 43        android:allowBackup="false"
@@ -82,39 +82,39 @@
 49        android:roundIcon="@mipmap/ic_launcher_round"
 49-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:9:5-50
 50        android:theme="@style/AppTheme"
-50-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-36
+50-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-36
 51        android:usesCleartextTraffic="true" >
-51-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:6:9-44
+51-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-40
 52        <meta-data
-52-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-13:65
+52-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:5-14:65
 53            android:name="com.google.android.geo.API_KEY"
-53-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:16-61
+53-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:16-61
 54            android:value="AIzaSyAB-1LxITk3jBhK2PaKv7QTD2BewYlPzxg" />
-54-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:7-62
+54-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:7-62
 55
 56        <activity
-56-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:5-25:16
+56-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:5-26:16
 57            android:name="com.evento.MainActivity"
-57-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:7-35
+57-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-35
 58            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-58-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-116
+58-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-116
 59            android:exported="true"
-59-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-30
+59-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-30
 60            android:label="@string/app_name"
-60-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-39
+60-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-39
 61            android:launchMode="singleTask"
-61-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-38
+61-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-38
 62            android:windowSoftInputMode="adjustResize" >
-62-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-49
+62-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-49
 63            <intent-filter>
-63-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-24:23
+63-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:7-25:23
 64                <action android:name="android.intent.action.MAIN" />
-64-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:9-61
-64-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:17-58
+64-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:9-61
+64-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:17-58
 65
 66                <category android:name="android.intent.category.LAUNCHER" />
-66-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:9-69
-66-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:23:19-66
+66-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:24:9-69
+66-->C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:24:19-66
 67            </intent-filter>
 68        </activity>
 69        <activity
