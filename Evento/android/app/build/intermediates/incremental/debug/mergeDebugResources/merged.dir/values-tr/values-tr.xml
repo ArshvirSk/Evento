@@ -62,6 +62,7 @@
     <string name="common_signin_button_text_long">Google\'da oturum aç</string>
     <string name="error_icon_content_description">Hata</string>
     <string name="exposed_dropdown_menu_content_description">Açılır menüyü göster</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Çeşitli"</string>
     <string gender="unknown" name="header_description">Başlık</string>
     <string name="icon_content_description">İletişim kutusu simgesi</string>
     <string gender="unknown" name="image_description">Görsel</string>

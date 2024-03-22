@@ -62,6 +62,7 @@
     <string name="common_signin_button_text_long">Log ind med Google</string>
     <string name="error_icon_content_description">Fejl</string>
     <string name="exposed_dropdown_menu_content_description">Vis rullemenuen</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Diverse"</string>
     <string gender="unknown" name="header_description">Overskrift</string>
     <string name="icon_content_description">Ikon for dialogboks</string>
     <string gender="unknown" name="image_description">Billede</string>

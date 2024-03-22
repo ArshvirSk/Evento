@@ -65,6 +65,7 @@
     <string name="common_signin_button_text_long">Přihlásit se k účtu Google</string>
     <string name="error_icon_content_description">Chyba</string>
     <string name="exposed_dropdown_menu_content_description">Zobrazit rozbalovací nabídku</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Různé"</string>
     <string gender="unknown" name="header_description">Nadpis</string>
     <string name="icon_content_description">Ikona dialogového okna</string>
     <string gender="unknown" name="image_description">Obrázek</string>

@@ -61,6 +61,7 @@
     <string name="common_signin_button_text_long">Увайсці праз Google</string>
     <string name="error_icon_content_description">Памылка</string>
     <string name="exposed_dropdown_menu_content_description">Паказаць выпадное меню</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Рознае"</string>
     <string name="icon_content_description">Значок дыялогавага акна</string>
     <string gender="unknown" name="image_description">Відарыс</string>
     <string gender="unknown" name="imagebutton_description">Кнопка, відарыс</string>

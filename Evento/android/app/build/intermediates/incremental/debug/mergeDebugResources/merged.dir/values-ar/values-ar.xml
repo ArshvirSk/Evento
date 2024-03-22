@@ -67,6 +67,7 @@
     <string name="common_signin_button_text_long">‏تسجيل الدخول عبر Google</string>
     <string name="error_icon_content_description">خطأ</string>
     <string name="exposed_dropdown_menu_content_description">عرض القائمة المنسدلة</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"متنوعة"</string>
     <string gender="unknown" name="header_description">العنوان</string>
     <string name="icon_content_description">رمز مربع الحوار</string>
     <string gender="unknown" name="image_description">صورة</string>

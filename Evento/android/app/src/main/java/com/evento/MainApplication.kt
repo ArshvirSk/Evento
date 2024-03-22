@@ -1,6 +1,8 @@
 package com.evento
 
 import android.app.Application
+
+import com.wix.reactnativenotifications.RNNotificationsPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost

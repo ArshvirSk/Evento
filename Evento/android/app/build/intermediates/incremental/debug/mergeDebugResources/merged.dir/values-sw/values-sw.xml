@@ -62,6 +62,7 @@
     <string name="common_signin_button_text_long">Ingia katika akaunti ukitumia Google</string>
     <string name="error_icon_content_description">Hitilafu</string>
     <string name="exposed_dropdown_menu_content_description">Onyesha menyu kunjuzi</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Zinginezo"</string>
     <string gender="unknown" name="header_description">Kichwa</string>
     <string name="icon_content_description">Aikoni ya Kidirisha</string>
     <string gender="unknown" name="image_description">Picha</string>

@@ -9,7 +9,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   new Event(
     'e2',
@@ -19,7 +19,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   new Event(
     'e3',
@@ -29,7 +29,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   new Event(
     'e4',
@@ -39,7 +39,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   new Event(
     'e5',
@@ -49,7 +49,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   new Event(
     'e6',
@@ -59,7 +59,7 @@ export const EVENTS = [
     '10:30 pm',
     100,
     'Thakur Polytechnic',
-    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.'
+    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit.'
   ),
   // new Event(
   //   "e11",
@@ -69,7 +69,7 @@ export const EVENTS = [
   //   "10:30 pm",
   //   100,
   //   "Thakur Polytechnic",
-  //   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem."
+  //   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit."
   // ),
   // new Event(
   //   "e12",
@@ -79,7 +79,7 @@ export const EVENTS = [
   //   "10:30 pm",
   //   100,
   //   "Thakur Polytechnic",
-  //   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem."
+  //   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit quam, repellat ut quisquam reiciendis voluptatibus. Necessitatibus, quo. Voluptate delectus asperiores fuga, deleniti corrupti voluptatem.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis impedit."
   // ),
 ];
 

@@ -64,6 +64,7 @@
     <string name="common_signin_button_text_long">Пријави ме на Google</string>
     <string name="error_icon_content_description">Грешка</string>
     <string name="exposed_dropdown_menu_content_description">Прикажи падајући мени</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Разно"</string>
     <string gender="unknown" name="header_description">Заглавље</string>
     <string name="icon_content_description">Икона дијалога</string>
     <string gender="unknown" name="image_description">Слика</string>

@@ -2,13 +2,15 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { Button, useTheme } from 'react-native-paper';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
 
 const CodeMRegisterScreen = ({ EventId, title }) => {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   const [department, setDepartment] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -163,10 +165,18 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           </Text>
         )}
 
-        <Button title="Submit"
+        <Button
+          mode="contained-tonal"
+          // icon="home"
+          style={{ backgroundColor: '#034694', marginTop: 20, paddingVertical: 7, borderRadius: 50 }}
+          textColor="#fff"
+          labelStyle={{ fontSize: 18, fontWeight: 'bold', letterSpacing: 5 }}
+          uppercase
+          rippleColor={theme.colors.background}
           onPress={handleSubmit(onSubmit)}
-        // onPress={handleSubmit(onSubmit)}
-        />
+        >
+          Next
+        </Button>
       </View>
       <View style={styles.centeredView}>
         <Modal
@@ -204,25 +214,18 @@ const styles = StyleSheet.create({
     marginTop: 0,
     margin: 20,
   },
+
   title: {
     fontSize: 20,
     marginBottom: 10,
     fontWeight: '900',
     textAlign: 'center',
-    backgroundColor: 'rgba(255, 255, 255,0.5)',
+    backgroundColor: 'rgba(255, 255, 255,0.1)',
     paddingVertical: 20,
     color: '#000',
+    textTransform: 'uppercase',
+    letterSpacing: 5,
   },
-  button: {
-    backgroundColor: 'red',
-    borderRadius: 5,
-    padding: 10,
-  },
-
-  // container: {
-  //   backgroundColor: "white",
-  //   padding: 16,
-  // },
 
   dropdown: {
     height: 50,
@@ -231,6 +234,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.404)',
+    color: '#000',
   },
   centeredView: {
     flex: 1,

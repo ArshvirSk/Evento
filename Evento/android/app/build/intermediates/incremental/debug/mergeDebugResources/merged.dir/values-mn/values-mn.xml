@@ -60,6 +60,7 @@
     <string name="common_signin_button_text_long">Google-р нэвтрэх:</string>
     <string name="error_icon_content_description">Алдаа</string>
     <string name="exposed_dropdown_menu_content_description">Доош унадаг цэсийг харуулах</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Бусад"</string>
     <string name="icon_content_description">Харилцах цонхны дүрс тэмдэг</string>
     <string gender="unknown" name="image_description">Зураг</string>
     <string gender="unknown" name="imagebutton_description">Товч, зураг</string>

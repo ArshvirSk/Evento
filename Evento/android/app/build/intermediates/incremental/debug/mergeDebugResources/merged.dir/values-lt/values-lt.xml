@@ -65,6 +65,7 @@
     <string name="common_signin_button_text_long">Prisijungti naudojant „Google“</string>
     <string name="error_icon_content_description">Klaida</string>
     <string name="exposed_dropdown_menu_content_description">Rodyti išskleidžiamąjį meniu</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Įvairūs"</string>
     <string gender="unknown" name="header_description">Antraštė</string>
     <string name="icon_content_description">Dialogo lango piktograma</string>
     <string gender="unknown" name="image_description">Vaizdas</string>

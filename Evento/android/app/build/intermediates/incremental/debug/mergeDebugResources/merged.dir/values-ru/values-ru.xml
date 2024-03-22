@@ -65,6 +65,7 @@
     <string name="common_signin_button_text_long">Войти через аккаунт Google</string>
     <string name="error_icon_content_description">Ошибка</string>
     <string name="exposed_dropdown_menu_content_description">Показать раскрывающееся меню</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"Другое"</string>
     <string gender="unknown" name="header_description">Заголовок</string>
     <string name="icon_content_description">Значок диалогового окна</string>
     <string gender="unknown" name="image_description">Изображение</string>

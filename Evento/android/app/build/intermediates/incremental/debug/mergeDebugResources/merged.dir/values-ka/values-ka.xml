@@ -62,6 +62,7 @@
     <string name="common_signin_button_text_long">Google-ით შესვლა</string>
     <string name="error_icon_content_description">შეცდომა</string>
     <string name="exposed_dropdown_menu_content_description">ჩამოსაშლელი მენიუს ჩვენება</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"სხვადასხვა"</string>
     <string gender="unknown" name="header_description">სათაური</string>
     <string name="icon_content_description">დიალოგის ხატულა</string>
     <string gender="unknown" name="image_description">გამოსახულება</string>

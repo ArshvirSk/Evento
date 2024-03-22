@@ -63,6 +63,7 @@
     <string name="common_signin_button_text_long">Google සමගින් පුරන්න</string>
     <string name="error_icon_content_description">දෝෂය</string>
     <string name="exposed_dropdown_menu_content_description">පතන මෙනුව පෙන්වන්න</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"විවිධ"</string>
     <string gender="unknown" name="header_description">සිරස්තලය</string>
     <string name="icon_content_description">සංවාද නිරූපකය</string>
     <string gender="unknown" name="image_description">රූපය</string>

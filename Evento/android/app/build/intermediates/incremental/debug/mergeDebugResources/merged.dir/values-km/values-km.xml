@@ -63,6 +63,7 @@
     <string name="common_signin_button_text_long">ចូលដោយប្រើ Google</string>
     <string name="error_icon_content_description">បញ្ហា</string>
     <string name="exposed_dropdown_menu_content_description">បង្ហាញ​ម៉ឺនុយ​ធ្លាក់ចុះ</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"ផ្សេងៗ"</string>
     <string gender="unknown" name="header_description">ចំណងជើង</string>
     <string name="icon_content_description">រូប​ប្រអប់បញ្ចូល</string>
     <string gender="unknown" name="image_description">រូបភាព</string>

@@ -63,6 +63,7 @@
     <string name="common_signin_button_text_long">Googleతో సైన్ ఇన్ చేయండి</string>
     <string name="error_icon_content_description">ఎర్రర్</string>
     <string name="exposed_dropdown_menu_content_description">డ్రాప్‌డౌన్ మెనూను చూపు</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"ఇతరాలు"</string>
     <string gender="unknown" name="header_description">శీర్షిక</string>
     <string name="icon_content_description">డైలాగ్ చిహ్నం</string>
     <string gender="unknown" name="image_description">చిత్రం</string>

@@ -63,6 +63,7 @@
     <string name="common_signin_button_text_long">‏ورود به سیستم با Google‎</string>
     <string name="error_icon_content_description">خطا</string>
     <string name="exposed_dropdown_menu_content_description">نمایش منوی کرکره‌ای</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"موارد دیگر"</string>
     <string gender="unknown" name="header_description">سر‌صفحه</string>
     <string name="icon_content_description">نماد کادر گفتگو</string>
     <string gender="unknown" name="image_description">تصویر</string>

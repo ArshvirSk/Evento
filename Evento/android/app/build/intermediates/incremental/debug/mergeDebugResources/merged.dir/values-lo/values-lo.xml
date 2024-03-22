@@ -60,6 +60,7 @@
     <string name="common_signin_button_text_long">ລົງຊື່ເຂົ້າໃຊ້ດ້ວຍ Google</string>
     <string name="error_icon_content_description">ຜິດພາດ</string>
     <string name="exposed_dropdown_menu_content_description">ສະແດງເມນູເລື່ອນລົງ</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"ອື່ນໆ"</string>
     <string name="icon_content_description">ໄອຄອນກ່ອງໂຕ້ຕອບ</string>
     <string gender="unknown" name="image_description">ຮູບພາບ</string>
     <string gender="unknown" name="imagebutton_description">ປຸ່ມ, ຮູບພາບ</string>

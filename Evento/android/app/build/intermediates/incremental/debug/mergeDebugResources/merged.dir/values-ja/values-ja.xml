@@ -63,6 +63,7 @@
     <string name="common_signin_button_text_long">Googleにログイン</string>
     <string name="error_icon_content_description">エラー</string>
     <string name="exposed_dropdown_menu_content_description">プルダウン メニューを表示</string>
+    <string msgid="4133737464567140336" name="fcm_fallback_notification_channel_label">"その他"</string>
     <string gender="unknown" name="header_description">見出し</string>
     <string name="icon_content_description">ダイアログ アイコン</string>
     <string gender="unknown" name="image_description">画像</string>

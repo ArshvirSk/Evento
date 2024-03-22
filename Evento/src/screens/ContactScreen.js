@@ -1,6 +1,5 @@
 import React from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const ContactScreen = () => {
@@ -14,7 +13,7 @@ const ContactScreen = () => {
         <View style={styles.container}>
           <Icon name="mail-outline" size={36} color={'#000'} />
           <Pressable style={({ pressed }) => [styles.subButton, pressed ? styles.pressed : '']} onPress={() => Linking.openURL('mailto:tantrautsavtpoly@gmail.com')} >
-            <Text style={styles.subButton} >
+            <Text style={[styles.subButton, { fontWeight: 'bold', fontSize: 14 }]} >
               xyz@gmail.com
             </Text>
           </Pressable>
@@ -22,13 +21,13 @@ const ContactScreen = () => {
         <View style={styles.container}>
           <Icon name="call-outline" size={36} color={'#000'} />
           <Pressable style={({ pressed }) => [styles.subButton, pressed ? styles.pressed : '']} onPress={() => Linking.openURL('tel:+9119082525752')} >
-            <Text style={styles.subButton}>+91 1234567890</Text>
+            <Text style={[styles.subButton, { fontWeight: 'bold', fontSize: 14 }]}>+91 1234567890</Text>
           </Pressable>
         </View>
-        <View>
-          {/* <Icon name="location-outline" size={36} /> */}
-          <Text style={styles.subButton}>Location</Text>
-          <MapView
+        <View style={styles.container}>
+          <Icon name="compass-outline" size={36} color={'#000'} />
+          <Text style={[styles.subButton, { fontWeight: 'bold', fontSize: 14 }]}>Thakur Polytechnic, Kandivali East, Mumbai, Maharashtra</Text>
+          {/* <MapView
             style={styles.map}
             provider={PROVIDER_GOOGLE}
             initialRegion={{
@@ -44,8 +43,13 @@ const ContactScreen = () => {
                 longitude: 72.86482745079506,
               }}
             />
-          </MapView>
+          </MapView> */}
         </View>
+      </View>
+
+      <View style={[styles.shadowProp, { marginBottom: 10 }]} >
+        <View style={[styles.image, { position: 'absolute', left: 10, bottom: -10, backgroundColor: '#0543be', borderRadius: 17 }]} />
+        <Image source={require('C:/ASK_Main/ASK_College/MEGA PROJECT/PROJECT/Evento/src/assets/tpoly.jpeg')} style={styles.image} />
       </View>
 
       <View style={styles.aboutUsSection} >
@@ -107,6 +111,23 @@ const styles = StyleSheet.create({
   },
   aboutUsSection: {
     marginBottom: 30,
+  },
+  shadowProp: {
+    marginHorizontal: 25,
+    elevation: 24,
+    shadowColor: '#171717',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  image: {
+    width: '100%',
+    height: 220,
+    marginTop: 15,
+    // backgroundColor: '#000000',
+    // opacity: 0.8,
+    borderRadius: 15,
+    resizeMode: 'cover',
   },
 });
 

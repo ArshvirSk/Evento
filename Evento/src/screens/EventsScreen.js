@@ -1,15 +1,17 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import EventTile from '../components/EventTile';
 import { EVENTS } from '../data/data';
 
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+// const Item = ({ title }) => (
+//   <View style={styles.item}>
+//     <Text style={styles.title}>{title}</Text>
+//   </View>
+// );
 
 const EventsScreen = ({ navigation }) => {
+  const theme = useTheme();
   function renderEventItem(itemData) {
     function pressHandler() {
       navigation.navigate('EventDetails', {
@@ -26,7 +28,7 @@ const EventsScreen = ({ navigation }) => {
       keyExtractor={(item) => item.id}
       renderItem={renderEventItem}
       numColumns={2}
-      style={styles.listContainer}
+      style={[styles.listContainer, { backgroundColor: theme.colors.background }]}
     />
   );
 };

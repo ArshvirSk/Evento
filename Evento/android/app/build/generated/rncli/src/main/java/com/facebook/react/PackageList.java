@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-maps
 import com.rnmaps.maps.MapsPackage;
+// react-native-notifications
+import com.wix.reactnativenotifications.RNNotificationsPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
@@ -70,6 +72,7 @@ public class PackageList {
       new MainReactPackage(mConfig),
       new RNGestureHandlerPackage(),
       new MapsPackage(),
+      new RNNotificationsPackage(reactNativeHost.getApplication()),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),

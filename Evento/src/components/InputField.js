@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 const InputField = ({ name, onBlur, onChange, value }) => {
   return (

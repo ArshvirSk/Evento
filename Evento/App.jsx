@@ -3,8 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from './src/components/CustomDrawer';
+import CompletedScreen from './src/screens/CompletedScreen';
 import ContactScreen from './src/screens/ContactScreen';
 import EventDetailsScreen from './src/screens/EventDetailsScreen';
 import EventsScreen from './src/screens/EventsScreen';
@@ -23,6 +25,7 @@ function NotificationsScreen({ navigation }) {
 }
 
 function DrawerScreen() {
+  const theme = useTheme();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -30,10 +33,19 @@ function DrawerScreen() {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-        drawerActiveBackgroundColor: '#e63939',
+        drawerActiveBackgroundColor: theme.colors.secondary,
         drawerActiveTintColor: 'white',
         drawerLabelStyle: {
-          marginLeft: -20,
+          marginLeft: -10,
+          fontSize: 16,
+        },
+        drawerStyle: {
+          borderRadius: 20,
+          // size: 26,
+        },
+        drawerItemStyle: {
+          paddingHorizontal: 10,
+          borderRadius: 12,
         },
         // headerStyle: {
         //   backgroundColor: "#aa8073",
@@ -47,11 +59,11 @@ function DrawerScreen() {
         component={EventsScreen}
         options={{
           drawerIcon: ({ color, size }) => (
-            <Icon name="home-outline" size={size} color={color} />
+            <Icon name="home-outline" size={size + 4} color={color} />
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Notification"
         component={NotificationsScreen}
         options={{
@@ -59,13 +71,13 @@ function DrawerScreen() {
             <Icon name="notifications-outline" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Contact Us"
         component={ContactScreen}
         options={{
           drawerIcon: ({ color, size }) => (
-            <Icon name="call-outline" size={size} color={color} />
+            <Icon name="call-outline" size={size + 4} color={color} />
           ),
         }}
       />
@@ -81,6 +93,7 @@ export default function App() {
         screenOptions={{
           headerTitleStyle: {
             fontWeight: 'bold',
+            fontSize: 20,
           },
         }}
       >
@@ -103,7 +116,7 @@ export default function App() {
           name="Register"
           component={RegisterScreen}
           options={{
-            title: 'Register Now',
+            title: 'Registration Form',
           }}
         />
         <Stack.Screen
@@ -111,6 +124,18 @@ export default function App() {
           component={PaymentScreen}
           options={{
             title: 'Payment',
+          }}
+        />
+        <Stack.Screen
+          name="Completed"
+          component={CompletedScreen}
+          options={{
+            title: 'Registration Completed',
+            headerBackVisible: false,
+            headerTitleStyle: {
+              // paddingLeft: 40,
+              fontSize: 18,
+            },
           }}
         />
       </Stack.Navigator>
