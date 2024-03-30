@@ -17,8 +17,9 @@ export default function EventDetailsScreen({ route, navigation }) {
   const selectedEvent = EVENTS.find((event) => event.id === eventId);
 
   function registerHandler() {
-    navigation.navigate('Register', {
-      eventId: eventId,
+    navigation.navigate('EventRegistration', {
+      screen: 'Register',
+      params: { eventId: eventId },
     });
   }
 
@@ -67,6 +68,7 @@ export default function EventDetailsScreen({ route, navigation }) {
           {/* Location */}
           <View>
             <Text style={[styles.title, styles.subTitle]}>Location</Text>
+            <Text style={[styles.subButton, { fontWeight: 'bold', fontSize: 14 }]}>Thakur Polytechnic, Kandivali East, Mumbai, Maharashtra</Text>
             {/* <MapView
               style={styles.map}
               provider={PROVIDER_GOOGLE}
@@ -186,5 +188,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+  },
+  subButton: {
+    textAlign: 'center',
+    marginHorizontal: 20,
+    color: '#000',
   },
 });

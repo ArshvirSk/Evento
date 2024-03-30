@@ -1,12 +1,134 @@
 import express from "express";
 import { ZodError } from "zod";
-import sheets, { SHEET_ID, auth } from "./sheetClient.js";
+import sheets, { SHEET_ID, USER_SHEET_ID, auth } from "./sheetClient.js";
 
 const app = express();
 
 const PORT = 5000;
 
+let userSignIn = false;
+
 app.use(express.json());
+
+// Checking for user in database
+app.post("/userCheck", async (req, res) => {
+    try {
+        console.log('User check');
+
+        const responseMain = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        // Extract phone numbers and passwords from the response
+        const userPairs = responseMain.data.values;
+
+        // Check if the provided phone number exists in the spreadsheet
+        let userFound = false;
+        for (let i = 1; i < userPairs.length; i++) {
+            const pair = userPairs[i];
+            const phoneNumberMatch = pair[0] === req.body[0];
+            const passwordMatch = pair[1] === req.body[1];
+
+            console.log(`Comparing user pair: ${pair}`);
+            console.log(`With request body: ${req.body}`);
+            console.log(`Phone number match: ${phoneNumberMatch}`);
+            console.log(`Password match: ${passwordMatch}`);
+            console.log("-------------------");
+
+            if (phoneNumberMatch && passwordMatch) {
+                userFound = true;
+                console.log("User found. Stopping search.");
+                break; // Stop searching if user is found
+            }
+        }
+
+        console.log(`User found: ${userFound}`);
+
+        userSignIn = userFound;
+
+        res.json({ success: userFound });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+})
+
+// Creating user in database
+app.post("/usercreate", async (req, res) => {
+    try {
+        let success;
+        let responseMain;
+        console.log(req);
+        // const body = contactFormSchema.parse(req.body);
+
+        const responseSub = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "COLUMNS",
+            valueRenderOption: "FORMATTED_VALUE",
+        })
+
+        console.log(responseSub.data.values[0]);
+
+        let userFound = false;
+
+        for (const e of responseSub.data.values[0]) {
+            if (e === req.body[0]) {
+                // USER FOUND
+                userFound = true;
+                console.log(e, userFound);
+                break;
+            }
+        }
+
+        if (!userFound) {
+            console.log(req.body[0], "User not found, creating...");
+            const appendResponse = await sheets.spreadsheets.values.append({
+                auth,
+                spreadsheetId: USER_SHEET_ID,
+                range: "Users",
+                valueInputOption: "RAW",
+                insertDataOption: "INSERT_ROWS",
+                resource: {
+                    values: [
+                        [
+                            req.body[0], //Phone Number
+                            req.body[1], //Password
+                        ],
+                    ]
+                },
+            });
+            console.log("User created successfully.");
+            responseMain = appendResponse;
+            success = true;
+        } else {
+            console.log(req.body[0], "User already exists.");
+            success = false;
+        }
+
+        userSignIn = success;
+
+        res.json({ success: success, message: { responseMain, responseSub } });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+})
+
+
 
 // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
 
@@ -16,7 +138,7 @@ app.post("/e1", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "Poster",
@@ -45,7 +167,7 @@ app.post("/e1", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -145,7 +267,7 @@ app.post("/e2", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "Model",
@@ -190,7 +312,7 @@ app.post("/e2", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -306,7 +428,7 @@ app.post("/e3", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "General Quiz",
@@ -335,7 +457,7 @@ app.post("/e3", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -435,7 +557,7 @@ app.post("/e4", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "Code Mosaic",
@@ -456,7 +578,7 @@ app.post("/e4", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -548,7 +670,7 @@ app.post("/e5", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "Technical Quiz",
@@ -577,7 +699,7 @@ app.post("/e5", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -677,7 +799,7 @@ app.post("/e6", async (req, res) => {
         // console.log(req);
         // const body = contactFormSchema.parse(req.body);
         let [responseMain, responseSub] = await Promise.all([
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "TPP",
@@ -706,7 +828,7 @@ app.post("/e6", async (req, res) => {
                     ],
                 },
             }),
-            await sheets.spreadsheets.values.append({
+            sheets.spreadsheets.values.append({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "ALL RESPONSES",
@@ -800,6 +922,7 @@ app.post("/e6check", async (req, res) => {
     }
 });
 
-app.listen(PORT, () =>
+// app.listen(PORT, () =>
+app.listen(PORT, '192.168.1.248', () =>
     console.log("App running on http://evento-w3o7.onrender.com/")
 );

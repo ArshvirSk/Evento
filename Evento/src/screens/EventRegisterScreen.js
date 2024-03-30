@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { EVENTS } from '../data/data';
 import { CodeMRegisterScreen, GeneralQuizRegisterScreen, ModelRegisterScreen, PosterRegisterScreen, TPPRegisterScreen, TechnicalQuizRegisterScreen } from './RegisterScreens';
 
-const RegisterScreen = ({ route }) => {
+const EventRegisterScreen = ({ route }) => {
   const eventId = route.params.eventId;
 
   const selectedEvent = EVENTS.find((event) => event.id === eventId);
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterScreen;
+export default EventRegisterScreen;

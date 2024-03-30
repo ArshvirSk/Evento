@@ -2,27 +2,21 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from './src/components/CustomDrawer';
 import CompletedScreen from './src/screens/CompletedScreen';
 import ContactScreen from './src/screens/ContactScreen';
 import EventDetailsScreen from './src/screens/EventDetailsScreen';
+import { default as EventRegisterScreen } from './src/screens/EventRegisterScreen';
 import EventsScreen from './src/screens/EventsScreen';
-import RegisterScreen from './src/screens/RegisterScreen';
 import PaymentScreen from './src/screens/RegisterScreens/PaymentScreen/PaymentScreen';
+import LoginScreen from './src/screens/UserLogin/LoginScreen';
+import RegisterScreen from './src/screens/UserLogin/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
 
 function DrawerScreen() {
   const theme = useTheme();
@@ -85,7 +79,84 @@ function DrawerScreen() {
   );
 }
 
+const Auth = () => {
+  // Stack Navigator for Login and Sign up Screen
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+    }} >
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{
+          title: 'Register User',
+          headerStyle: {
+            backgroundColor: '#307ecc', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold', //Set Header text style
+          },
+        }}
+      />
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const EventAuth = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="Register"
+      screenOptions={{
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 20,
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Register"
+        component={EventRegisterScreen}
+        options={{
+          title: 'Registration Form',
+        }}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={PaymentScreen}
+        options={{
+          title: 'Payment',
+        }}
+      />
+      <Stack.Screen
+        name="Completed"
+        component={CompletedScreen}
+        options={{
+          title: 'Registration Completed',
+          headerBackVisible: false,
+          headerTitleStyle: {
+            // paddingLeft: 40,
+            fontSize: 18,
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+
 export default function App() {
+  // useEffect(() => {
+  //   SplashScreen.hide();
+  // }, []);
+
+  // setTimeout(() => {
+  //   SplashScreen.hide();
+  // }, 1000);
 
   return (
     <NavigationContainer>
@@ -97,6 +168,17 @@ export default function App() {
           },
         }}
       >
+        {/* <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        /> */}
+        <Stack.Screen
+          name="Auth"
+          component={Auth}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="Drawer"
           options={{
@@ -112,32 +194,7 @@ export default function App() {
             title: 'Event Details',
           }}
         />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{
-            title: 'Registration Form',
-          }}
-        />
-        <Stack.Screen
-          name="Payment"
-          component={PaymentScreen}
-          options={{
-            title: 'Payment',
-          }}
-        />
-        <Stack.Screen
-          name="Completed"
-          component={CompletedScreen}
-          options={{
-            title: 'Registration Completed',
-            headerBackVisible: false,
-            headerTitleStyle: {
-              // paddingLeft: 40,
-              fontSize: 18,
-            },
-          }}
-        />
+        <Stack.Screen name="EventRegistration" component={EventAuth} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

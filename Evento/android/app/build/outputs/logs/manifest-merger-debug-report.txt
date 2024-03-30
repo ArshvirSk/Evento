@@ -6,6 +6,7 @@ INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\sr
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-maps] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-notifications] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-notifications\lib\android\app\build\intermediates\merged_manifest\reactNative60Debug\AndroidManifest.xml:2:1-25:12
@@ -263,6 +264,8 @@ INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\sr
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-maps] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
