@@ -10,6 +10,7 @@ import InputField from '../../components/InputField';
 const LoginScreen = ({ navigation }) => {
     const theme = useTheme();
     const [modalVisible, setModalVisible] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const {
         control,
@@ -20,12 +21,20 @@ const LoginScreen = ({ navigation }) => {
     const onSubmit = async (data) => {
         const inputData = Object.values(data);
         console.log(inputData);
+
+        var phone = inputData[0];
+        var pass = inputData[1];
+
+        console.log(phone);
+        console.log(pass);
+
         try {
             const response = await axios.post('http://192.168.1.248:5000/userCheck', inputData);
-            console.log(response.data.success);
+            console.log(response.data.message);
+            const user = response.data.message[0];
             if (response.data.success) {
-                navigation.navigate('Drawer');
                 console.log('User logged in');
+                navigation.replace('Drawer', { data: { user, phone, pass } });
             } else {
                 setModalVisible(true);
             }
@@ -33,6 +42,10 @@ const LoginScreen = ({ navigation }) => {
             console.log(error);
         }
     };
+
+    function toggleShowPassword() {
+        setShowPassword(!showPassword);
+    }
 
     return (
         <View style={styles.centeredView} >
@@ -49,13 +62,15 @@ const LoginScreen = ({ navigation }) => {
                             onBlur={onBlur}
                             onChange={onChange}
                             value={value}
+                            keyboardType={'number-pad'}
+                            maxLength={10}
                         />
                     )}
                     name="phonenumber"
                 />
                 {errors.phonenumber && (
                     <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
-                        This is required.
+                        Phone number is required.
                     </Text>
                 )}
                 <Controller
@@ -64,18 +79,22 @@ const LoginScreen = ({ navigation }) => {
                         required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <InputField
-                            name="Password"
-                            onBlur={onBlur}
-                            onChange={onChange}
-                            value={value}
-                        />
+                        <>
+
+                            <InputField
+                                name="Password"
+                                onBlur={onBlur}
+                                onChange={onChange}
+                                value={value}
+                                secure={!showPassword}
+                            />
+                        </>
                     )}
                     name="password"
                 />
                 {errors.password && (
                     <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
-                        This is required.
+                        Password is required.
                     </Text>
                 )}
                 <View>

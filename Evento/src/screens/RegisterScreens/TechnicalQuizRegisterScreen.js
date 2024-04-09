@@ -8,7 +8,7 @@ import { Button, useTheme } from 'react-native-paper';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
 
-const TechnicalQuizRegisterScreen = ({ EventId, title }) => {
+const TechnicalQuizRegisterScreen = ({ EventId, title, mydata }) => {
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -70,7 +70,8 @@ const TechnicalQuizRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://evento-w3o7.onrender.com/e5check',
+        'http://192.168.1.248:5000/e5check',
+        // 'http://evento-w3o7.onrender.com/e5check',
         inputData
       );
       console.log(response.data.valueMatched);
@@ -79,7 +80,7 @@ const TechnicalQuizRegisterScreen = ({ EventId, title }) => {
         console.log('Value matched, executing subsequent code...');
         setModalVisible(true);
       } else {
-        navigation.navigate('Payment', { data: inputData });
+        navigation.navigate('Payment', { data: inputData, mydata: mydata });
         console.log('Value not matched, executing alternative code...');
       }
     } catch (error) {
@@ -147,6 +148,8 @@ const TechnicalQuizRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant1phonenumber"
@@ -190,6 +193,8 @@ const TechnicalQuizRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant2phonenumber"

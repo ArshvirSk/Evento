@@ -10,6 +10,23 @@ let userSignIn = false;
 
 app.use(express.json());
 
+// Function to append values to a spreadsheet
+async function appendToSpreadsheet(spreadsheetId, range, values) {
+    try {
+        const response = await sheets.spreadsheets.values.append({
+            auth,
+            spreadsheetId,
+            range,
+            valueInputOption: "RAW",
+            insertDataOption: "INSERT_ROWS",
+            resource: { values },
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error appending data to ${range}: ${error.message}`);
+    }
+}
+
 // Checking for user in database
 app.post("/userCheck", async (req, res) => {
     try {
@@ -26,13 +43,14 @@ app.post("/userCheck", async (req, res) => {
 
         // Extract phone numbers and passwords from the response
         const userPairs = responseMain.data.values;
+        let pair
 
         // Check if the provided phone number exists in the spreadsheet
         let userFound = false;
         for (let i = 1; i < userPairs.length; i++) {
-            const pair = userPairs[i];
-            const phoneNumberMatch = pair[0] === req.body[0];
-            const passwordMatch = pair[1] === req.body[1];
+            pair = userPairs[i];
+            const phoneNumberMatch = pair[1] === req.body[0];
+            const passwordMatch = pair[2] === req.body[1];
 
             console.log(`Comparing user pair: ${pair}`);
             console.log(`With request body: ${req.body}`);
@@ -51,7 +69,7 @@ app.post("/userCheck", async (req, res) => {
 
         userSignIn = userFound;
 
-        res.json({ success: userFound });
+        res.json({ success: userFound, message: pair });
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -62,7 +80,7 @@ app.post("/userCheck", async (req, res) => {
 })
 
 // Creating user in database
-app.post("/usercreate", async (req, res) => {
+app.post("/userCreate", async (req, res) => {
     try {
         let success;
         let responseMain;
@@ -102,8 +120,15 @@ app.post("/usercreate", async (req, res) => {
                 resource: {
                     values: [
                         [
-                            req.body[0], //Phone Number
-                            req.body[1], //Password
+                            req.body[0], //Username
+                            req.body[1], //Phone Number
+                            req.body[2], //Password
+                            'FALSE',
+                            'FALSE',
+                            'FALSE',
+                            'FALSE',
+                            'FALSE',
+                            'FALSE',
                         ],
                     ]
                 },
@@ -128,85 +153,137 @@ app.post("/usercreate", async (req, res) => {
     }
 })
 
+app.post("/userDetails", async (req, res) => {
+    try {
+        console.log('User Details');
+        console.log(req.body);
+        const phonenum = req.body.phone;
+        const password = req.body.pass;
 
+        const responseMain = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
+
+        // Extract phone numbers and passwords from the response
+        const userPairs = responseMain.data.values;
+
+        console.log(userPairs);
+
+        const rowIndex = userPairs.findIndex(row => row[1] === phonenum && row[2] === password);
+
+        const myuser = userPairs[rowIndex]
+
+        console.log(myuser);
+
+        const userEvents = [];
+
+        for (let i = 3; i < myuser.length; i++) {
+            if (myuser[i] === 'TRUE') {
+                // Assuming the event names are e1, e2, e3, ...
+                userEvents.push(`e${i - 2}`);
+            }
+        }
+
+        console.log("User events:", userEvents);
+        res.json({ success: true, message: userEvents })
+    } catch (error) {
+        if (error instanceof ZodError) {
+            res.status(400).json({ error: error.message });
+        } else {
+            res.status(400).json({ error: error });
+        }
+    }
+})
 
 // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
 
 // POSTER MAKING
 app.post("/e1", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "Poster",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ]);
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+        const userData = rows[rowIndex]
+
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[5], // Name
+                    req.body.data[6], // Phone Number
+                ],
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[7], // Name
+                    req.body.data[8], // Phone Number
+                ],
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "Poster", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                req.body.mydata.pass,  // password
+                                true,
+                                userData[4],
+                                userData[5],
+                                userData[6],
+                                userData[7],
+                                userData[8],
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
+        } else {
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
+        }
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -264,110 +341,102 @@ app.post("/e1check", async (req, res) => {
 // MODEL MAKING
 app.post("/e2", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "Model",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[9], //Name
-                            req.body[10], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[11], //Name
-                            req.body[12], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[9], //Name
-                            req.body[10], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[11], //Name
-                            req.body[12], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ])
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+
+        const userData = rows[rowIndex]
+
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[5], //Name
+                    req.body.data[6], //Phone Number
+                ],
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[7], //Name
+                    req.body.data[8], //Phone Number
+                ],
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[9], //Name
+                    req.body.data[10], //Phone Number
+                ],
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[11], //Name
+                    req.body.data[12], //Phone Number
+                ],
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "Model", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                req.body.mydata.pass,  // password
+                                userData[3],
+                                true,
+                                userData[5],
+                                userData[6],
+                                userData[7],
+                                userData[8],
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
+        } else {
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
+        }
+
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -425,78 +494,85 @@ app.post("/e2check", async (req, res) => {
 // GENERAL QUIZ
 app.post("/e3", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "General Quiz",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ])
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+        const userData = rows[rowIndex]
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[5], // Name
+                    req.body.data[6], // Phone Number
+                ],
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[7], // Name
+                    req.body.data[8], // Phone Number
+                ],
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "General Quiz", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                req.body.mydata.pass,  // password
+                                userData[3],
+                                userData[4],
+                                true,
+                                userData[6],
+                                userData[7],
+                                userData[8],
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
+        } else {
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
+        }
+
+
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -554,68 +630,78 @@ app.post("/e3check", async (req, res) => {
 // CODE MOSAIC
 app.post("/e4", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "Code Mosaic",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ])
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
-    } catch (error) {
-        if (error instanceof ZodError) {
-            res.status(400).json({ error: error.message });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+        const userData = rows[rowIndex]
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[5], // Name
+                    req.body.data[6], // Phone Number
+                ]
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "Code Mosaic", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                req.body.mydata.pass,  // password
+                                userData[3],
+                                userData[4],
+                                userData[5],
+                                true,
+                                userData[7],
+                                userData[8],
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
         } else {
-            res.status(400).json({ error: error });
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
         }
+    } catch (error) {
+        console.error("Error updating data:", error);
+        res.status(400).json({ error: "Error updating data" });
     }
 });
 
@@ -667,78 +753,83 @@ app.post("/e4check", async (req, res) => {
 // TECHNICAL QUIZ
 app.post("/e5", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "Technical Quiz",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ])
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+        const userData = rows[rowIndex]
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[5], // Name
+                    req.body.data[6], // Phone Number
+                ],
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[7], //Name
+                    req.body.data[8], //Phone Number
+                ],
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "Technical Quiz", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                req.body.mydata.pass,  // password
+                                userData[3],
+                                userData[4],
+                                userData[5],
+                                userData[6],
+                                true,
+                                userData[8],
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
+        } else {
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
+        }
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });
@@ -796,78 +887,82 @@ app.post("/e5check", async (req, res) => {
 // TPP
 app.post("/e6", async (req, res) => {
     try {
-        // console.log(req);
-        // const body = contactFormSchema.parse(req.body);
-        let [responseMain, responseSub] = await Promise.all([
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "TPP",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            }),
-            sheets.spreadsheets.values.append({
-                auth,
-                spreadsheetId: SHEET_ID,
-                range: "ALL RESPONSES",
-                valueInputOption: "RAW",
-                insertDataOption: "INSERT_ROWS",
-                resource: {
-                    values: [
-                        // Timestamp, EventID, Event, College Name, Dept Name, Participant Name, Phone Number
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[5], //Name
-                            req.body[6], //Phone Number
-                        ],
-                        [
-                            req.body[0], //Timestamp
-                            req.body[2], //Event
-                            req.body[4], //College name
-                            req.body[3], //Dept Name
-                            req.body[7], //Name
-                            req.body[8], //Phone Number
-                        ],
-                        // req.body, //debugging purposes
-                    ],
-                },
-            })
-        ])
+        const phoneNumber = req.body.mydata.phone;
 
-        console.log(responseMain);
-        console.log(responseSub);
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId: USER_SHEET_ID,
+            range: "Users",
+            dateTimeRenderOption: "FORMATTED_STRING",
+            majorDimension: "ROWS",
+            valueRenderOption: "FORMATTED_VALUE",
+        });
 
-        // const responseMain = await sheets.spreadsheets.values.get({
-        //   spreadsheetId: SHEET_ID,
-        //   range: "Page1",
-        // });
-        // console.log(responseMain);
-        res.json({ success: true, message: responseMain });
+        const rows = response.data.values;
+
+        console.log(req.body.data);
+
+        // Find the index of the row corresponding to the user's phone number
+        const rowIndex = rows.findIndex(row => row[1] === phoneNumber);
+        const userData = rows[rowIndex]
+
+        if (rowIndex !== -1) {
+            // Define the values to append to the "Code Mosaic" and "ALL RESPONSES" sheets
+
+            const valuesToAppend = [
+                [
+                    req.body.data[0], // Timestamp
+                    req.body.data[2], // Event
+                    req.body.data[4], // College name
+                    req.body.data[3], // Dept Name
+                    req.body.data[5], // Name
+                    req.body.data[6], // Phone Number
+                ],
+                [
+                    req.body.data[0], //Timestamp
+                    req.body.data[2], //Event
+                    req.body.data[4], //College name
+                    req.body.data[3], //Dept Name
+                    req.body.data[7], //Name
+                    req.body.data[8], //Phone Number
+                ],
+            ];
+
+            // Perform asynchronous requests to append data to spreadsheets and update user data
+            const [responseMain, responseSub, responseUpdate] = await Promise.all([
+                appendToSpreadsheet(SHEET_ID, "TPP", valuesToAppend),
+                appendToSpreadsheet(SHEET_ID, "ALL RESPONSES", valuesToAppend),
+                sheets.spreadsheets.values.update({
+                    auth,
+                    spreadsheetId: USER_SHEET_ID,
+                    range: `Users!A${rowIndex + 1}:I${rowIndex + 1}`, // Assuming columns A to F contain the user data
+                    valueInputOption: "RAW",
+                    resource: {
+                        values: [
+                            [
+                                req.body.mydata.user,  // username
+                                phoneNumber,            // phone number
+                                userData[3],
+                                userData[4],
+                                userData[5],
+                                userData[6],
+                                userData[7],
+                                true,
+                            ]
+                        ],
+                    },
+                })
+            ]);
+
+            console.log(responseMain);
+            console.log(responseSub);
+            console.log(responseUpdate);
+
+            res.json({ success: true, message: "Data updated successfully" });
+        } else {
+            console.log("User not found in the database");
+            res.status(404).json({ success: false, message: "User not found" });
+        }
     } catch (error) {
         if (error instanceof ZodError) {
             res.status(400).json({ error: error.message });

@@ -8,7 +8,7 @@ import { Button, useTheme } from 'react-native-paper';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
 
-const CodeMRegisterScreen = ({ EventId, title }) => {
+const CodeMRegisterScreen = ({ EventId, title, mydata }) => {
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -78,7 +78,8 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://evento-w3o7.onrender.com/e4check',
+        'http://192.168.1.248:5000/e4check',
+        // 'http://evento-w3o7.onrender.com/e4check',
         inputData
       );
       console.log(response.data.valueMatched);
@@ -87,13 +88,15 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
         console.log('Value matched, executing subsequent code...');
         setModalVisible(true);
       } else {
-        navigation.navigate('Payment', { data: inputData });
+        navigation.replace('Payment', { data: inputData, mydata: mydata });
         console.log('Value not matched, executing alternative code...');
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log(mydata);
 
   return (
     <ScrollView>
@@ -114,7 +117,7 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
           )}
           name="collegename"
         />
-        {errors.participant1name && (
+        {errors.collegename && (
           <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
             This is required.
           </Text>
@@ -155,6 +158,8 @@ const CodeMRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant1phonenumber"

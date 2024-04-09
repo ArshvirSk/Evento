@@ -1,18 +1,11 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 // import { Icon } from 'react-native-vector-icons/Ionicons';
 import { useTheme } from 'react-native-paper';
 
-export default function EventTile({ id, title, date, time }) {
+export default function EventTile({ id, title, date, time, onPress }) {
   const theme = useTheme();
-  const navigation = useNavigation();
-  function selectEventHandler() {
-    navigation.navigate('EventDetails', {
-      eventId: id,
-    });
-    // console.log(id);
-  }
+
   return (
     <View style={[styles.item, { backgroundColor: theme.colors.primary }]}>
       <Pressable
@@ -21,7 +14,7 @@ export default function EventTile({ id, title, date, time }) {
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]}
-        onPress={selectEventHandler}
+        onPress={onPress}
       >
         {/* <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>

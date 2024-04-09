@@ -1,9 +1,10 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Pressable, Text, View } from 'react-native';
+import BootSplash from 'react-native-bootsplash';
 import { useTheme } from 'react-native-paper';
-import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from './src/components/CustomDrawer';
 import CompletedScreen from './src/screens/CompletedScreen';
@@ -11,15 +12,23 @@ import ContactScreen from './src/screens/ContactScreen';
 import EventDetailsScreen from './src/screens/EventDetailsScreen';
 import { default as EventRegisterScreen } from './src/screens/EventRegisterScreen';
 import EventsScreen from './src/screens/EventsScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 import PaymentScreen from './src/screens/RegisterScreens/PaymentScreen/PaymentScreen';
 import LoginScreen from './src/screens/UserLogin/LoginScreen';
 import RegisterScreen from './src/screens/UserLogin/RegisterScreen';
-
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawerScreen() {
+function DrawerScreen({ route, navigation }) {
+  const data = route.params?.data;
   const theme = useTheme();
+
+  console.log('DRAWER', data);
+
+  function logOutHandler() {
+    navigation.replace('Auth');
+  }
+
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -50,6 +59,7 @@ function DrawerScreen() {
     >
       <Drawer.Screen
         name="Home"
+        initialParams={{ data }}
         component={EventsScreen}
         options={{
           drawerIcon: ({ color, size }) => (
@@ -57,15 +67,6 @@ function DrawerScreen() {
           ),
         }}
       />
-      {/* <Drawer.Screen
-        name="Notification"
-        component={NotificationsScreen}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Icon name="notifications-outline" size={size} color={color} />
-          ),
-        }}
-      /> */}
       <Drawer.Screen
         name="Contact Us"
         component={ContactScreen}
@@ -73,6 +74,28 @@ function DrawerScreen() {
           drawerIcon: ({ color, size }) => (
             <Icon name="call-outline" size={size + 4} color={color} />
           ),
+        }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        initialParams={{ data }}
+        component={ProfileScreen}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Icon name="checkmark-done-outline" size={size + 4} color={color} />
+          ),
+          title: 'Profile',
+          headerRight: () => (
+            <Pressable onPress={logOutHandler}>
+              <Text style={{ color: '#000', marginRight: 15, fontWeight: '700', fontSize: 16 }} >Log Out</Text>
+              {/* <Icon name="log-out-outline" size={32} color={'#000'} /> */}
+            </Pressable>
+            // <Button
+            //   onPress={() => console.log('This is a button!')}
+            //   title="Log Out"
+            // />
+          ),
+
         }}
       />
     </Drawer.Navigator>
@@ -86,6 +109,10 @@ const Auth = () => {
       headerShown: false,
     }} >
       <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+      />
+      <Stack.Screen
         name="RegisterScreen"
         component={RegisterScreen}
         options={{
@@ -98,10 +125,6 @@ const Auth = () => {
             fontWeight: 'bold', //Set Header text style
           },
         }}
-      />
-      <Stack.Screen
-        name="LoginScreen"
-        component={LoginScreen}
       />
     </Stack.Navigator>
   );
@@ -150,52 +173,50 @@ const EventAuth = () => {
 
 
 export default function App() {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, []);
-
-  // setTimeout(() => {
-  //   SplashScreen.hide();
-  // }, 1000);
+  useEffect(() => {
+    BootSplash.hide();
+  });
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-        }}
-      >
-        {/* <Stack.Screen
+    <View style={{ flex: 1 }} >
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 20,
+            },
+          }}
+        >
+          {/* <Stack.Screen
           name="Splash"
           component={SplashScreen}
           options={{ headerShown: false }}
         /> */}
-        <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{ headerShown: false }}
-        />
+          <Stack.Screen
+            name="Auth"
+            component={Auth}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="Drawer"
-          options={{
-            headerShown: false,
-          }}
-          component={DrawerScreen}
-        />
-        <Stack.Screen name="Home" component={EventsScreen} />
-        <Stack.Screen
-          name="EventDetails"
-          component={EventDetailsScreen}
-          options={{
-            title: 'Event Details',
-          }}
-        />
-        <Stack.Screen name="EventRegistration" component={EventAuth} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="Drawer"
+            options={{
+              headerShown: false,
+            }}
+            component={DrawerScreen}
+          />
+          <Stack.Screen name="Home" component={EventsScreen} />
+          <Stack.Screen
+            name="EventDetails"
+            component={EventDetailsScreen}
+            options={{
+              title: 'Event Details',
+            }}
+          />
+          <Stack.Screen name="EventRegistration" component={EventAuth} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }

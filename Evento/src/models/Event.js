@@ -1,5 +1,5 @@
 class Event {
-  constructor(id, title, imageUrl, date, time, price, location, descrption) {
+  constructor(id, title, imageUrl, date, time, price, location, descrption, objective, rules) {
     this.id = id;
     this.title = title;
     this.imageUrl = imageUrl;
@@ -8,6 +8,8 @@ class Event {
     this.price = price;
     this.location = location;
     this.descrption = descrption;
+    this.objective = objective;
+    this.rules = rules;
   }
 }
 

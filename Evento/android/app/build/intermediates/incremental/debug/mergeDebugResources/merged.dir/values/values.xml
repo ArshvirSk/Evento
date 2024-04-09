@@ -19,6 +19,9 @@
     </attr>
     <attr format="dimension" name="barrierMargin"/>
     <attr format="boolean" name="behavior_draggable"/>
+    <attr format="color" name="bootSplashBackground"/>
+    <attr format="reference" name="bootSplashBrand"/>
+    <attr format="reference" name="bootSplashLogo"/>
     <attr format="reference" name="bottomAppBarStyle"/>
     <attr format="reference" name="bottomNavigationStyle"/>
     <attr format="reference" name="bottomSheetDialogTheme"/>
@@ -97,6 +100,7 @@
         <enum name="spline" value="0"/>
         <enum name="linear" value="1"/>
     </attr>
+    <attr format="boolean" name="darkContentBarsStyle"/>
     <attr format="integer" name="defaultDuration"/>
     <attr format="float" name="deltaPolarAngle"/>
     <attr format="float" name="deltaPolarRadius"/>
@@ -433,6 +437,7 @@
         <enum name="gone" value="8"/>
     </attr>
     <attr format="reference" name="popupMenuBackground"/>
+    <attr format="reference" name="postBootSplashTheme"/>
     <attr format="reference" name="recyclerViewStyle"/>
     <attr format="color" name="rippleColor"/>
     <attr format="color|reference" name="scrimBackground"/>
@@ -560,6 +565,7 @@
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="bootsplash_background">#6AECFF</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -866,7 +872,6 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
-    <color name="primary_dark">#000000</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -1865,6 +1870,9 @@
     <integer name="react_native_inspector_proxy_port">8081</integer>
     <integer name="show_password_duration">200</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <item name="launch_screen" type="layout">
+        @layout/launch_screen
+    </item>
     <plurals description="Plural form content description for number of new notifications [CHAR_LIMIT=NONE]" name="mtrl_badge_content_description">
     <item quantity="one"><ns2:g id="count">%d</ns2:g> new notification</item>
     <item quantity="other"><ns2:g id="count">%d</ns2:g> new notifications</item>
@@ -5481,6 +5489,19 @@
     <item name="shapeAppearanceOverlay">@null</item>
   </style>
     <style name="Base.Widget.MaterialComponents.TextView" parent="Widget.AppCompat.TextView"/>
+    <style name="BootSplashFadeOutAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@anim/bootsplash_fade_out</item>
+    </style>
+    <style name="BootSplashNoAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+    <style name="BootTheme" parent="Theme.BootSplash">
+        <item name="bootSplashBackground">@color/bootsplash_background</item>
+        <item name="bootSplashLogo">@drawable/bootsplash_logo</item>
+        <item name="postBootSplashTheme">@style/AppTheme</item>
+    </style>
     <style name="CalendarDatePickerDialog" ns1:targetApi="lollipop" parent="android:Theme.Material.Dialog.Alert">
         <item name="android:datePickerStyle">@style/CalendarDatePickerStyle</item>
         <item name="android:windowIsFloating">true</item>
@@ -6363,6 +6384,29 @@
         <item name="autofillInlineSuggestionEndIconStyle">
             @style/Widget.Autofill.InlineSuggestionEndIconStyle
         </item>
+    </style>
+    <style name="Theme.BootSplash" parent="Theme.BootSplash.DayNight">
+        <item name="bootSplashBackground">?android:colorBackground</item>
+        <item name="bootSplashLogo">@android:drawable/sym_def_app_icon</item>
+        <item name="postBootSplashTheme">?android:attr/theme</item>
+    </style>
+    <style name="Theme.BootSplash.Common" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:opacity">opaque</item>
+        <item name="android:windowBackground">@drawable/compat_splash_screen</item>
+        <item name="bootSplashBrand">@drawable/transparent_pixel</item>
+    </style>
+    <style name="Theme.BootSplash.DayNight" parent="Theme.BootSplash.Common">
+    </style>
+    <style name="Theme.BootSplash.EdgeToEdge" parent="Theme.BootSplash.EdgeToEdge.DayNight">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+    <style name="Theme.BootSplash.EdgeToEdge.Common" parent="Theme.BootSplash">
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+    <style name="Theme.BootSplash.EdgeToEdge.DayNight" parent="Theme.BootSplash.EdgeToEdge.Common">
+        <item name="darkContentBarsStyle">true</item>
     </style>
     <style name="Theme.Catalyst"/>
     <style name="Theme.Catalyst.LogBox">

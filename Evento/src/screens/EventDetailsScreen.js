@@ -12,14 +12,15 @@ import { EVENTS } from '../data/data';
 
 export default function EventDetailsScreen({ route, navigation }) {
   const theme = useTheme();
-  const eventId = route.params.eventId;
+  const { eventId, mydata } = route.params;
+  console.log(route.params);
 
   const selectedEvent = EVENTS.find((event) => event.id === eventId);
 
   function registerHandler() {
     navigation.navigate('EventRegistration', {
       screen: 'Register',
-      params: { eventId: eventId },
+      params: { eventId: eventId, mydata: mydata },
     });
   }
 
@@ -62,6 +63,14 @@ export default function EventDetailsScreen({ route, navigation }) {
             <Text style={[styles.title, styles.subTitle]}>Description</Text>
             <Text style={styles.desc}>
               {selectedEvent.descrption}
+            </Text>
+            <Text style={[styles.title, styles.subTitle]}>Objective</Text>
+            <Text style={styles.desc}>
+              {selectedEvent.objective}
+            </Text>
+            <Text style={[styles.title, styles.subTitle]}>Rules</Text>
+            <Text style={styles.desc}>
+              {selectedEvent.rules}
             </Text>
           </View>
 

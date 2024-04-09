@@ -1,13 +1,14 @@
 R_DEF: Internal format may change without notice
 local
-color primary_dark
-drawable evento
+color bootsplash_background
+drawable bootsplash_logo
 drawable rn_edit_text_material
+drawable screen
 integer react_native_dev_server_port
 integer react_native_inspector_proxy_port
-layout launch_screen
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string app_name
 style AppTheme
+style BootTheme

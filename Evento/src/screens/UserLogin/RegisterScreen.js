@@ -9,8 +9,8 @@ import InputField from '../../components/InputField';
 
 const RegisterScreen = ({ navigation }) => {
     const theme = useTheme();
-    // const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
+    const [passMatch, setPassMatch] = useState(false);
 
     const {
         control,
@@ -21,16 +21,27 @@ const RegisterScreen = ({ navigation }) => {
     const onSubmit = async (data) => {
         const inputData = Object.values(data);
         console.log(inputData);
+
+        var user = inputData[0];
+        var phone = inputData[1];
+        var pass = inputData[2];
+
+        console.log(phone);
+        console.log(pass);
+
         try {
-            if (inputData[1] === inputData[2]) {
-                const response = await axios.post('http://192.168.1.248:5000/usercreate', inputData);
+            if (inputData[2] === inputData[3]) {
+                const response = await axios.post('http://192.168.1.248:5000/userCreate', inputData);
                 console.log(response.data.success);
                 if (response.data.success === false) {
                     setModalVisible(true);
                 } else {
-                    navigation.navigate('Drawer');
                     console.log('User Created');
+                    navigation.replace('Drawer', { data: { user, phone, pass } });
                 }
+                setPassMatch(false);
+            } else {
+                setPassMatch(true);
             }
         } catch (error) {
             console.log(error);
@@ -48,10 +59,33 @@ const RegisterScreen = ({ navigation }) => {
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
                         <InputField
+                            name="Username"
+                            onBlur={onBlur}
+                            onChange={onChange}
+                            value={value}
+                            maxLength={10}
+                        />
+                    )}
+                    name="username"
+                />
+                {errors.phonenumber && (
+                    <Text style={{ color: 'red', marginTop: -15, marginBottom: 10 }}>
+                        This is required.
+                    </Text>
+                )}
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <InputField
                             name="Phone Number"
                             onBlur={onBlur}
                             onChange={onChange}
                             value={value}
+                            keyboardType={'number-pad'}
+                            maxLength={10}
                         />
                     )}
                     name="phonenumber"
@@ -72,6 +106,7 @@ const RegisterScreen = ({ navigation }) => {
                             onBlur={onBlur}
                             onChange={onChange}
                             value={value}
+                            secure
                         />
                     )}
                     name="password"
@@ -92,6 +127,7 @@ const RegisterScreen = ({ navigation }) => {
                             onBlur={onBlur}
                             onChange={onChange}
                             value={value}
+                            secure
                         />
                     )}
                     name="reenterpassword"
@@ -136,6 +172,28 @@ const RegisterScreen = ({ navigation }) => {
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.textStyle}>Okay</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+            </View>
+            <View style={styles.centeredView} >
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={passMatch}
+                    onRequestClose={() => {
+                        setPassMatch(!passMatch);
+                        console.log('Modal has been closed.');
+                    }}>
+                    <View>
+                        <View style={styles.modalView}>
+                            <Icon name="alert-circle-outline" size={56} color={'#b90000'} />
+                            <Text style={styles.modalText}>Password doesn't match.</Text>
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => setPassMatch(!passMatch)}>
                                 <Text style={styles.textStyle}>Okay</Text>
                             </Pressable>
                         </View>

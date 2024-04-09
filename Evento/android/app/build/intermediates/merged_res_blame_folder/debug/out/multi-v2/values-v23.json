@@ -23,6 +23,25 @@
                     }
                 },
                 {
+                    "source": "C:\\ASK_Main\\ASK_College\\MEGA PROJECT\\PROJECT\\Evento\\node_modules\\react-native-bootsplash\\android\\build\\intermediates\\packaged_res\\debug\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "382"
+                    },
+                    "to": {
+                        "startLines": "55",
+                        "startColumns": "4",
+                        "startOffsets": "3511",
+                        "endLines": "59",
+                        "endColumns": "12",
+                        "endOffsets": "3838"
+                    }
+                },
+                {
                     "source": "C:\\Users\\ASUS\\.gradle\\caches\\transforms-3\\b3627ca143232ec2ceb6e319eb18971d\\transformed\\appcompat-1.6.1\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
@@ -52,12 +71,12 @@
                         "endOffsets": "266,476,796,1033,1240,1447,1650,1982,2184,2449,2722"
                     },
                     "to": {
-                        "startLines": "55,58,61,66,70,73,76,79,84,87,91",
+                        "startLines": "60,63,66,71,75,78,81,84,89,92,96",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3511,3727,3937,4257,4494,4701,4908,5111,5443,5645,5910",
-                        "endLines": "57,60,65,69,72,75,78,83,86,90,94",
+                        "startOffsets": "3843,4059,4269,4589,4826,5033,5240,5443,5775,5977,6242",
+                        "endLines": "62,65,70,74,77,80,83,88,91,95,99",
                         "endColumns": "10,10,10,10,10,10,10,10,10,10,10",
-                        "endOffsets": "3722,3932,4252,4489,4696,4903,5106,5438,5640,5905,6178"
+                        "endOffsets": "4054,4264,4584,4821,5028,5235,5438,5770,5972,6237,6510"
                     }
                 },
                 {

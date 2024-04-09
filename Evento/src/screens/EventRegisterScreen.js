@@ -4,7 +4,9 @@ import { EVENTS } from '../data/data';
 import { CodeMRegisterScreen, GeneralQuizRegisterScreen, ModelRegisterScreen, PosterRegisterScreen, TPPRegisterScreen, TechnicalQuizRegisterScreen } from './RegisterScreens';
 
 const EventRegisterScreen = ({ route }) => {
-  const eventId = route.params.eventId;
+  const { eventId, mydata } = route.params;
+
+  console.log(mydata);
 
   const selectedEvent = EVENTS.find((event) => event.id === eventId);
 
@@ -14,22 +16,22 @@ const EventRegisterScreen = ({ route }) => {
   const renderRegisterScreen = () => {
     switch (EventId) {
       case 'e1':
-        return <PosterRegisterScreen EventId={EventId} title={title} />;
+        return <PosterRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       case 'e2':
-        return <ModelRegisterScreen EventId={EventId} title={title} />;
+        return <ModelRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       case 'e3':
-        return <GeneralQuizRegisterScreen EventId={EventId} title={title} />;
+        return <GeneralQuizRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       case 'e4':
-        return <CodeMRegisterScreen EventId={EventId} title={title} />;
+        return <CodeMRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       case 'e5':
-        return <TechnicalQuizRegisterScreen EventId={EventId} title={title} />;
+        return <TechnicalQuizRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       case 'e6':
-        return <TPPRegisterScreen EventId={EventId} title={title} />;
+        return <TPPRegisterScreen EventId={EventId} mydata={mydata} title={title} />;
 
       default:
         break;

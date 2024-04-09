@@ -8,7 +8,7 @@ import { Button, useTheme } from 'react-native-paper';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
 
-const ModelRegisterScreen = ({ EventId, title }) => {
+const ModelRegisterScreen = ({ EventId, title, mydata }) => {
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -70,7 +70,8 @@ const ModelRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://evento-w3o7.onrender.com/e2check',
+        'http://192.168.1.248:5000/e2check',
+        // 'http://evento-w3o7.onrender.com/e2check',
         inputData
       );
       console.log(response.data.valueMatched);
@@ -79,7 +80,7 @@ const ModelRegisterScreen = ({ EventId, title }) => {
         console.log('Value matched, executing subsequent code...');
         setModalVisible(true);
       } else {
-        navigation.navigate('Payment', { data: inputData });
+        navigation.navigate('Payment', { data: inputData, mydata: mydata });
         console.log('Value not matched, executing alternative code...');
       }
     } catch (error) {
@@ -147,6 +148,8 @@ const ModelRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant1phonenumber"
@@ -190,6 +193,8 @@ const ModelRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant2phonenumber"
@@ -233,6 +238,8 @@ const ModelRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant3phonenumber"
@@ -276,6 +283,8 @@ const ModelRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant4phonenumber"

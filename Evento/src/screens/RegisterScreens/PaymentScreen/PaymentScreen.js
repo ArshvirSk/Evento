@@ -5,15 +5,17 @@ import { Button, useTheme } from 'react-native-paper';
 import { EVENTS } from '../../../data/data';
 
 const PaymentScreen = ({ route, navigation }) => {
-    const { data } = route.params;
+    const { data, mydata } = route.params;
     const theme = useTheme();
 
+    console.log(mydata);
     const eventDets = EVENTS.find((event) => event.id === data[1]);
 
     // console.log(data);
     console.log(eventDets);
 
-    const eventURL = 'http://evento-w3o7.onrender.com/' + eventDets.id;
+    const eventURL = 'http://192.168.1.248:5000/' + eventDets.id;
+    // const eventURL = 'http://evento-w3o7.onrender.com/' + eventDets.id;
 
     console.log(eventURL);
 
@@ -21,10 +23,10 @@ const PaymentScreen = ({ route, navigation }) => {
         try {
             const response = await axios.post(
                 eventURL,
-                data
+                { data: data, mydata: mydata }
             );
             console.log(response.data);
-            navigation.navigate('Completed', { data: eventDets });
+            navigation.replace('Completed', { data: eventDets, mydata: mydata });
         } catch (error) {
             console.error(error);
         }

@@ -10,13 +10,20 @@ import { EVENTS } from '../data/data';
 //   </View>
 // );
 
-const EventsScreen = ({ navigation }) => {
+const EventsScreen = ({ route, navigation }) => {
   const theme = useTheme();
+  const { data } = route.params;
   function renderEventItem(itemData) {
+    const eventId = itemData.item.id;
+    const mydata = Object.values({
+      eventId,
+      ...data,
+    });
+
+    console.log(mydata);
+
     function pressHandler() {
-      navigation.navigate('EventDetails', {
-        eventId: itemData.item.id,
-      });
+      navigation.navigate('EventDetails', { eventId: eventId, mydata: data });
     }
 
     return <EventTile {...itemData.item} onPress={pressHandler} />;

@@ -5,14 +5,16 @@ MERGED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-bootsplash] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-bootsplash\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-async-storage_async-storage] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-maps] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-notifications] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-notifications\lib\android\app\build\intermediates\merged_manifest\reactNative60Debug\AndroidManifest.xml:2:1-25:12
 MERGED from [:react-native-reanimated] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-reanimated\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-vector-icons] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\e1231b5b187cb579b629117f9511a862\transformed\jetified-react-android-0.73.6-debug\AndroidManifest.xml:2:1-24:12
 MERGED from [com.facebook.fresco:flipper-fresco-plugin:3.1.3] C:\Users\ASUS\.gradle\caches\transforms-3\2b5ba21ddda073e33e012f0d689623c6\transformed\jetified-flipper-fresco-plugin-3.1.3\AndroidManifest.xml:8:1-13:12
@@ -209,45 +211,44 @@ MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:7:5-37
 	tools:ignore
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:8:9-48
-	android:roundIcon
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:9:5-50
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:9:5-50
 	tools:targetApi
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml:7:9-29
 	android:icon
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:8:5-39
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:8:5-39
 	android:allowBackup
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:10:5-32
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:10:5-32
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:9:5-32
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:9:5-32
 	android:theme
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-36
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-36
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-36
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-36
 	android:usesCleartextTraffic
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:11:5-40
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:10:5-40
 	android:name
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:6:5-36
 		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:6:5-36
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:5-14:65
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:5-13:65
 	android:value
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:7-62
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:7-62
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:13:16-61
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:12:16-61
 activity#com.evento.MainActivity
-ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:5-26:16
+ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:14:5-26:16
 	android:label
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-39
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-39
 	android:launchMode
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-38
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-38
 	android:windowSoftInputMode
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-49
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:19:7-49
 	android:exported
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-30
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:20:7-30
 	android:configChanges
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:18:7-116
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:17:7-116
+	android:theme
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:21:7-39
 	android:name
-		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:16:7-35
+		ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:15:7-35
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\main\AndroidManifest.xml:22:7-25:23
 action#android.intent.action.MAIN
@@ -262,10 +263,12 @@ uses-sdk
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml
 INJECTED from C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\android\app\src\debug\AndroidManifest.xml
+MERGED from [:react-native-bootsplash] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-bootsplash\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-bootsplash] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-bootsplash\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:flipper-integration:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\7ceec762c322db3b2ee74240d8e71306\transformed\jetified-flipper-integration-0.73.6-debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-async-storage_async-storage] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-async-storage_async-storage] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-maps] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-maps\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
@@ -278,6 +281,8 @@ MERGED from [:react-native-safe-area-context] C:\ASK_Main\ASK_College\MEGA PROJE
 MERGED from [:react-native-safe-area-context] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-splash-screen] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-vector-icons] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-vector-icons] C:\ASK_Main\ASK_College\MEGA PROJECT\PROJECT\Evento\node_modules\react-native-vector-icons\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.73.6] C:\Users\ASUS\.gradle\caches\transforms-3\e1231b5b187cb579b629117f9511a862\transformed\jetified-react-android-0.73.6-debug\AndroidManifest.xml:10:5-44

@@ -8,7 +8,7 @@ import { Button, useTheme } from 'react-native-paper';
 import InputField from '../../components/InputField';
 import { departments } from '../../data/data';
 
-const PosterRegisterScreen = ({ EventId, title }) => {
+const PosterRegisterScreen = ({ EventId, title, mydata }) => {
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -78,7 +78,8 @@ const PosterRegisterScreen = ({ EventId, title }) => {
 
     try {
       const response = await axios.post(
-        'http://evento-w3o7.onrender.com/e1check',
+        'http://192.168.1.248:5000/e1check',
+        // 'http://evento-w3o7.onrender.com/e1check',
         inputData
       );
       console.log(response.data.valueMatched);
@@ -87,7 +88,7 @@ const PosterRegisterScreen = ({ EventId, title }) => {
         console.log('Value matched, executing subsequent code...');
         setModalVisible(true);
       } else {
-        navigation.navigate('Payment', { data: inputData });
+        navigation.navigate('Payment', { data: inputData, mydata: mydata });
         console.log('Value not matched, executing alternative code...');
       }
     } catch (error) {
@@ -155,6 +156,8 @@ const PosterRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant1phonenumber"
@@ -198,6 +201,8 @@ const PosterRegisterScreen = ({ EventId, title }) => {
               onBlur={onBlur}
               onChange={onChange}
               value={value}
+              keyboardType={'number-pad'}
+              maxLength={10}
             />
           )}
           name="participant2phonenumber"
