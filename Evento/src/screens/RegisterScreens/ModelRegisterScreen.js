@@ -70,8 +70,8 @@ const ModelRegisterScreen = ({ EventId, title, mydata }) => {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.248:5000/e2check',
-        // 'http://evento-w3o7.onrender.com/e2check',
+        // 'http://192.168.1.248:5000/e2check',
+        'http://evento-w3o7.onrender.com/e2check',
         inputData
       );
       console.log(response.data.valueMatched);
